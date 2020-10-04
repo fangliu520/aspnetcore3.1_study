@@ -9,11 +9,13 @@ namespace ConsoleAppNetCore3
     {
         static void Main(string[] args)
         {
-            string phone = "13116227549qq.com.cn";
+            string phone = "127.0.211.122";
             //Regex rx = new Regex(@"^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$");
-            Regex rx = new Regex(@"^(1[3-9][0-9])[0-9]{8}$");
-            Regex yx = new Regex(@"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
-            if (!yx.IsMatch(phone)) //不匹配
+            //Regex rx = new Regex(@"^(1[3-9][0-9])[0-9]{8}$");
+            //Regex yx = new Regex(@"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
+            Regex rx = new Regex(@"^((25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))$");
+
+            if (!rx.IsMatch(phone)) //不匹配
             {
                 Console.WriteLine($"{phone}手机格式不正确");
             }
