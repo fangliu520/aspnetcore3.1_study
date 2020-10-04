@@ -45,8 +45,7 @@ namespace AppNetCore.Utility.Validate
         public override bool Validate(object obj)
         {
 
-            return obj != null
-                && int.TryParse(obj.ToString(), out _)
+            return obj != null            
                 && obj.ToString().Length >= _iMin
                 && obj.ToString().Length < _iMax;
         }

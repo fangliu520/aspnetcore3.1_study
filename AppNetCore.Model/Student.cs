@@ -33,5 +33,9 @@ namespace AppNetCore.Model
      
       
         public int? Age { get; set; }
+        //[EmailValidate]
+        //public string Email { get; set; }
+        //[PhoneValidate]
+        //public string Phone { get; set; }
     }
 }

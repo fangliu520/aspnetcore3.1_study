@@ -105,13 +105,17 @@ namespace WebCoreTest3._1.Controllers
             //}
             #endregion
 
-            Student mod= _baseService.GetStudent(1);
-            mod.Name = "";// $"{mod.Name}_insertfdsdweddddddddwewwdcf";
-            mod.Age = 200;
+            Student mod = new Student();
 
-            ViewBag.Status = _baseService.InsertStudent(mod);
+            ///Student mod= _baseService.GetStudent(1);
+            //mod.Name = "";// $"{mod.Name}_insertfdsdweddddddddwewwdcf";
+            //mod.Age = 200;
+
+            //ViewBag.Status = _baseService.InsertStudent(mod);
 
             mod.Name = "妞儿";
+            //mod.Phone = "1366666111";
+            //mod.Email = "22222@QQ.COM";
             ViewBag.Status = _baseService.InsertStudent(mod);
             ViewBag.Strategy = _Options.strategy.ToString();
             return View();

@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AppNetCore.Utility.Validate
 {
@@ -35,7 +36,9 @@ namespace AppNetCore.Utility.Validate
 
         public override bool Validate(object obj)
         {
-            throw new NotImplementedException();
+            Regex rx = new Regex(@"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
+            return obj != null
+                  && rx.IsMatch(obj.ToString()); //匹配
         }
 
 
