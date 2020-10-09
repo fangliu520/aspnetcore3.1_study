@@ -35,4 +35,6 @@ node_modules
 .suo
 **/.suo
 *.TXT
+**/.vs
 .vs/*
+
