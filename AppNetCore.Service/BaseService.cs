@@ -6,6 +6,8 @@ using System.Data;
 
 using AppNetCore.Model;
 using AppNetCore.Service.Utility;
+using System;
+using System.Linq.Expressions;
 
 namespace AppNetCore.Service
 {
@@ -38,6 +40,22 @@ namespace AppNetCore.Service
         public bool InsertStudent(Student student)
         {
             return _dapperHelper.Insert<Student>(student);
+        }
+
+        public PagedResult<Student> GetPagedResult(Student student, int? pageIndex = null, int? pageSize = null)
+        {
+            
+            return _dapperHelper.GetPagedResult<Student>(student);
+        }
+
+        public Student Get(Expression<Func<Student, bool>> expression = null)
+        {
+            return _dapperHelper.Get<Student>(expression);
+        }
+
+        public PagedResult<Student> GetPagedResult(Student student, Expression<Func<Student, bool>> expression , int? pageIndex = null, int? pageSize = null)
+        {
+            return _dapperHelper.GetPagedResult<Student>(student,expression);
         }
     }
 }

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using WebCoreTest3._1.Utility;
 using log4net;
 using AppNetCore.Service.Utility;
+using AppNetCore.Utility;
 
 namespace WebCoreTest3._1
 {
@@ -32,16 +33,17 @@ namespace WebCoreTest3._1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<DBConnectionOption>(Configuration.GetSection("ConnectionString"));            
+            services.Configure<DBConnectionOption>(Configuration.GetSection("ConnectionString"));
             services.AddTransient<IBaseService, BaseService>();
             services.AddTransient<ICustomConnectionFactory, CustomConnectionFactory>();
             services.AddTransient<IDbConnection, SqlConnection>();
             services.AddTransient<IDapperHelper, DapperHelper>();
+            services.AddTransient<IExpressionToSqlWhereHelper, ExpressionToSqlWhereHelper>();
             services.AddControllersWithViews().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
             });
-           
+
 
             ///全局注册异常Filter
             //services.AddControllersWithViews(options =>
@@ -63,7 +65,7 @@ namespace WebCoreTest3._1
             }
             app.UseMiddleware<RefuseStealChainMiddleWare>();//防盗链中间件
             app.UseStaticFiles();
-          
+
             app.UseRouting();
 
             app.UseAuthorization();

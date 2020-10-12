@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AppNetCore.Interface\AppNetCore.Interface.csproj" />
     <ProjectReference Include="..\AppNetCore.Service\AppNetCore.Service.csproj" />
+    <ProjectReference Include="..\AppNetCore.Utility\AppNetCore.Utility.csproj" />
   </ItemGroup>
 
 </Project>

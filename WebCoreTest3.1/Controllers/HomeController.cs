@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AppNetCore.Interface.Extend;
 using AppNetCore.Model;
@@ -105,19 +106,24 @@ namespace WebCoreTest3._1.Controllers
             //}
             #endregion
 
-            Student mod = new Student();
+            //Student mod = new Student();
 
-            ///Student mod= _baseService.GetStudent(1);
+            Expression<Func<Student, bool>> expression = e => e.Id==1 &&e.Name.Contains("json") &&e.Age>1;
+            Student mod = _baseService.Get(expression);
+            //Student mod = _baseService.GetStudent(1);
             //mod.Name = "";// $"{mod.Name}_insertfdsdweddddddddwewwdcf";
             //mod.Age = 200;
 
             //ViewBag.Status = _baseService.InsertStudent(mod);
 
             mod.Name = "妞儿";
-            //mod.Phone = "1366666111";
-            //mod.Email = "22222@QQ.COM";
-            ViewBag.Status = _baseService.InsertStudent(mod);
+            mod.Phone = "13666661111";
+            mod.Email = "22222@QQ.COM";
+           // ViewBag.Status = _baseService.InsertStudent(mod);
             ViewBag.Strategy = _Options.strategy.ToString();
+            //expression = e => e.Name.Contains("李四") && e.Age > 1;
+             expression=null;// e=>e.Id>1;
+           ViewBag.DataList = _baseService.GetPagedResult(mod,expression);
             return View();
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using AppNetCore.Model;
 namespace AppNetCore.Service
@@ -13,5 +14,10 @@ namespace AppNetCore.Service
 
         bool InsertStudent(Student student);
 
+        PagedResult<Student> GetPagedResult(Student student, int? pageIndex = null, int? pageSize = null);
+
+        Student Get(Expression<Func<Student, bool>> expression);
+
+        PagedResult<Student> GetPagedResult(Student student, Expression<Func<Student, bool>> expression, int? pageIndex = null, int? pageSize = null);
     }
 }

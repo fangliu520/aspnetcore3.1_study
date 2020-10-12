@@ -1,10 +1,10 @@
 ﻿/*************************************************************************************
    * CLR版本：        4.0.30319.42000
-   * 类 名 称：       Student
+   * 类 名 称：       PagedResult
    * 机器名称：       WIN-AQ2FSGMEQLL
    * 命名空间：       AppNetCore.Model
-   * 文 件 名：       Student
-   * 创建时间：       2020/9/29 15:02:58
+   * 文 件 名：       PagedResult
+   * 创建时间：       2020/10/10 11:01:42
    * 作    者：       LIUFANG
    * 说   明：
    * 类型                    命外规则                     说明
@@ -18,24 +18,48 @@
    * 修改时间：
    * 修 改 人：
   *************************************************************************************/
-using AppNetCore.Utility.Validate;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AppNetCore.Model
 {
-    public class Student:BaseModel
+    public class PagedResult<T>
     {
-        [NullOrSpaceValidate]
-        [LengthValidate(2, 10, ErrorMsg = "长度范围只能在2-10，不包括10")]//
-        public string Name { get; set; }
-     
-      
-        public int? Age { get; set; }
-        [EmailValidate]
-        public string Email { get; set; }
-        [PhoneValidate]
-        public string Phone { get; set; }
+        /// <summary>
+        /// 结果
+        /// </summary>
+        public List<T> Data { get; set; }
+
+        /// <summary>
+        /// 当前页码
+        /// </summary>
+        public int PageIndex { get; set; }
+        /// <summary>
+        /// 每页页数
+        /// </summary>
+        public int PageSize { get; set; }
+        /// <summary>
+        /// 总数
+        /// </summary>
+        public int TotalNum { get; set; }
     }
+
+    public class BaseView<T>
+    {
+        public T Data { get; set; }
+        /// <summary>
+        /// 总数
+        /// </summary>
+        public int TotalNum { get; set; }
+
+    }
+
+
+
+
+
+
+
+
 }

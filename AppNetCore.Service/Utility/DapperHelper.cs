@@ -30,16 +30,41 @@ using System.Data;
 using System.Data.SqlClient;
 using AppNetCore.Service.Extend;
 using AppNetCore.Utility.Validate;
+using System.Linq.Expressions;
+using AppNetCore.Utility;
+
 namespace AppNetCore.Service.Utility
 {
     public class DapperHelper : IDapperHelper
     {
 
         private ICustomConnectionFactory _ConnectionFactory;
-        public DapperHelper(ICustomConnectionFactory factory)
+        private IExpressionToSqlWhereHelper _expressionToSqlWhereHelper;
+
+        public DapperHelper(ICustomConnectionFactory factory, IExpressionToSqlWhereHelper expressionToSqlWhereHelper)
         {
             _ConnectionFactory = factory;
+            _expressionToSqlWhereHelper = expressionToSqlWhereHelper;
         }
+
+        public T Get<T>(Expression<Func<T, bool>> expression) where T : BaseModel, new()
+        {
+            Type type = typeof(T);           
+            string sqlWhere =expression!=null? _expressionToSqlWhereHelper.Condition(expression):"";
+            sqlWhere = string.IsNullOrWhiteSpace(sqlWhere) ? "" : $" where {sqlWhere}";
+            string columsString = string.Join(",", type.GetProperties().Select(p => $"[{p.Name}]"));
+            string sqlStr = $"select {columsString} from [{type.Name}]  {sqlWhere}";
+            IDbConnection conStr = _ConnectionFactory.GetConnection(WriteAndRead.Read);
+            using (SqlConnection conn = new SqlConnection(conStr.ConnectionString))
+            {
+                var r = conn.Query<T>(sqlStr).ToList();
+                if (r != null && r.Count > 0)
+                    return r[0] as T;
+            }
+
+            return default(T);
+        }
+
         public T GetById<T>(int id) where T : BaseModel
         {
             Type type = typeof(T);
@@ -49,7 +74,7 @@ namespace AppNetCore.Service.Utility
             using (SqlConnection conn = new SqlConnection(conStr.ConnectionString))
             {
                 var r = conn.Query<T>(sqlStr, new { id = id }).ToList();
-                if (r != null)
+                if (r != null && r.Count > 0)
                     return r[0] as T;
             }
 
@@ -58,7 +83,88 @@ namespace AppNetCore.Service.Utility
 
         public IEnumerable<T> GetList<T>(T t) where T : BaseModel, new()
         {
+
             throw new NotImplementedException();
+        }
+
+        public PagedResult<T> GetPagedResult<T>(T t, int? pageIndex = null, int? pageSize = null) where T : class, new()
+        {
+            PagedResult<T> pagedResult = new PagedResult<T>();
+            pagedResult.PageIndex = pageIndex ?? 1;
+            pagedResult.PageSize = pageSize ?? 15;
+            Type type = typeof(T);
+            string columsString = string.Join(",", type.GetProperties().Select(p => $"[{p.Name}]"));
+            string sqlStr = string.Format(@" WITH   t AS ( 
+                                                            SELECT   {0} FROM [{1}] WITH ( NOLOCK )
+                                                         )
+                                                        SELECT  t.* ,p.TotalNum FROM  t ,( SELECT COUNT(0) TotalNum FROM t) p
+                                                        ORDER BY t.Id OFFSET ( ( @pageIndex - 1 ) * @pageSize ) ROWS FETCH NEXT @pageSize ROWS ONLY;", columsString, type.Name);
+            IDbConnection conStr = _ConnectionFactory.GetConnection(WriteAndRead.Read);
+            using (SqlConnection conn = new SqlConnection(conStr.ConnectionString))
+            {
+                var r = conn.Query(sqlStr, new { pageIndex = pagedResult.PageIndex, pageSize = pagedResult.PageSize });
+                if (r != null)
+                {
+                    List<T> tList = new List<T>();
+                    int pageNum = 0;
+                    foreach (var v in r)
+                    {
+                        IDictionary<string, object> s = v as IDictionary<string, object>;
+                        pageNum = (int)s["TotalNum"];
+                        T newT = new T();
+                        foreach (var prop in type.GetProperties())
+                        {
+                            prop.SetValue(newT, s[prop.Name]);
+                        }
+                        tList.Add(newT);
+                    }
+                    pagedResult.Data = tList;
+                    pagedResult.TotalNum = pageNum;
+                }
+                return pagedResult;
+            }
+
+
+        }
+
+        public PagedResult<T> GetPagedResult<T>(T t, Expression<Func<T, bool>> expression , int? pageIndex = null, int? pageSize = null) where T : class, new()
+        {
+            PagedResult<T> pagedResult = new PagedResult<T>();
+            pagedResult.PageIndex = pageIndex ?? 1;
+            pagedResult.PageSize = pageSize ?? 15;
+            string sqlWhere = expression != null ? _expressionToSqlWhereHelper.Condition(expression) : "";
+            sqlWhere = string.IsNullOrWhiteSpace(sqlWhere) ? "" : $" where {sqlWhere}";
+            Type type = typeof(T);
+            string columsString = string.Join(",", type.GetProperties().Select(p => $"[{p.Name}]"));
+            string sqlStr = string.Format(@" WITH   t AS ( 
+                                                            SELECT   {0} FROM [{1}] WITH ( NOLOCK ) {2}
+                                                         )
+                                                        SELECT  t.* ,p.TotalNum FROM  t ,( SELECT COUNT(0) TotalNum FROM t) p
+                                                        ORDER BY t.Id OFFSET ( ( @pageIndex - 1 ) * @pageSize ) ROWS FETCH NEXT @pageSize ROWS ONLY;", columsString, type.Name,sqlWhere);
+            IDbConnection conStr = _ConnectionFactory.GetConnection(WriteAndRead.Read);
+            using (SqlConnection conn = new SqlConnection(conStr.ConnectionString))
+            {
+                var r = conn.Query(sqlStr, new { pageIndex = pagedResult.PageIndex, pageSize = pagedResult.PageSize });
+                if (r != null)
+                {
+                    List<T> tList = new List<T>();
+                    int pageNum = 0;
+                    foreach (var v in r)
+                    {
+                        IDictionary<string, object> s = v as IDictionary<string, object>;
+                        pageNum = (int)s["TotalNum"];
+                        T newT = new T();
+                        foreach (var prop in type.GetProperties())
+                        {
+                            prop.SetValue(newT, s[prop.Name]);
+                        }
+                        tList.Add(newT);
+                    }
+                    pagedResult.Data = tList;
+                    pagedResult.TotalNum = pageNum;
+                }
+                return pagedResult;
+            }
         }
 
         public bool Insert<T>(T t) where T : BaseModel, new()
@@ -69,7 +175,7 @@ namespace AppNetCore.Service.Utility
                 string msg = DataValidateExtend.ErrorMsg;
                 return false;
             }
-            
+
             string columnStr = string.Join(",", type.GetPropertiesWithNoKey().Select(p => $"{p.Name}"));
             string columnValueStr = string.Join(",", type.GetPropertiesWithNoKey().Select(p => $"@{p.Name}"));
             string sqlStr = $"INSERT INTO [{type.Name}]({columnStr}) values({columnValueStr})";
