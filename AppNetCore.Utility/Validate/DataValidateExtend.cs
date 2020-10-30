@@ -28,7 +28,7 @@ namespace AppNetCore.Utility.Validate
     {
       public static string ErrorMsg { get; set; }
         public static bool ValidateModel<T>(this T t)
-        {
+        {            
             Type type = typeof(T);
 
             foreach (var prop in type.GetProperties())

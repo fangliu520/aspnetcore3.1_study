@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<form action="/Home/AddRedis" method="post">
+
+    <div class="form-group">
+        <input class="form-control" type="text" id="Genre" name="content" value="Western" />
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="添加Redis内容" class="btn btn-primary" />
+    </div>
+</form>

@@ -37,5 +37,7 @@ namespace AppNetCore.Model
         public string Email { get; set; }
         [PhoneValidate]
         public string Phone { get; set; }
+
+        public DateTime? CreateTime { get; set; }
     }
 }

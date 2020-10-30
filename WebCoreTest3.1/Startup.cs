@@ -18,6 +18,7 @@ using WebCoreTest3._1.Utility;
 using log4net;
 using AppNetCore.Service.Utility;
 using AppNetCore.Utility;
+using AppNetCore.Utility.Redis;
 
 namespace WebCoreTest3._1
 {
@@ -34,6 +35,8 @@ namespace WebCoreTest3._1
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<DBConnectionOption>(Configuration.GetSection("ConnectionString"));
+            services.Configure<RedisConnectionOption>(Configuration.GetSection("RedisConnectionString"));
+            services.AddTransient<IRedisHelper, RedisHelper>();
             services.AddTransient<IBaseService, BaseService>();
             services.AddTransient<ICustomConnectionFactory, CustomConnectionFactory>();
             services.AddTransient<IDbConnection, SqlConnection>();

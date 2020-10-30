@@ -50,6 +50,7 @@ namespace AppNetCore.Service
 
         public Student Get(Expression<Func<Student, bool>> expression = null)
         {
+            Console.WriteLine("成功调用get方法");
             return _dapperHelper.Get<Student>(expression);
         }
 

@@ -8,4 +8,16 @@
 
     <div>从库选择策略：@ViewBag.Strategy 链接库：@Html.ViewBag.conn</div>
     <img src="~/images/1.jpg" />
+
+
+    <form action="/Home/AddRedis" method="post">
+
+        <div class="form-group">
+            <input class="form-control" type="text" id="Genre" name="content" value="Western" />
+
+        </div>
+        <div class="form-group">
+            <input type="submit" value="添加内容" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
