@@ -21,5 +21,18 @@ namespace AppNetCore.Utility.Redis
         IDictionary<string, T> GetAll<T>(IEnumerable<string> keys);
 
         void AddItemToList(string listId, string value);
+
+        /// <summary>
+        /// 订阅消息
+        /// </summary>
+        /// <param name="channel">频道</param>
+        /// <param name="msg">消息内容</param>
+        void SubscribeMsg(string channel);
+        /// <summary>
+        /// 发布消息
+        /// </summary>
+        /// <param name="channel"></param>
+        /// <param name="msg"></param>
+        void PubLishMsg(string channel,string msg);
     }
 }

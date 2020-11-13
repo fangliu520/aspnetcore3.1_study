@@ -9,7 +9,7 @@ namespace ConsoleAppServer
     {
         static void Main(string[] args)
         {
-            if (!string.IsNullOrEmpty(args[0]))
+            if (args.Length>0)
             {
                 Console.WriteLine(args[0]);
             }
@@ -20,7 +20,7 @@ namespace ConsoleAppServer
         }
 
 
-        private const string SERVER = "127.0.0.2";
+        private const string SERVER = "127.0.0.1";
         private const int PORT = 6379;
         private const string PWD = "123456";
         private static RedisClient rc = new RedisClient(SERVER, PORT, PWD);

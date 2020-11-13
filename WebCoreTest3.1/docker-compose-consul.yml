@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+  consul1: 
+    image: consul:latest
+    container_name: consul1
+    restart: always
+    ports:
+      - 8300:8300 
+      - 8301:8301 
+      - 8301:8301/udp 
+      - 8302:8303 
+      - 8302:8302/udp 
+      - 8400:8400 
+      - 8500:8500 
+      - 8600:8600 
+    command: agent -server -client=0.0.0.0 -bootstrap-expect=3 -node=consul1 -datacenter=dc1 -data-dir=/tmp/data-dir -client 0.0.0.0 -ui
+  consul2:
+    image: consul:latest
+    container_name: consul2
+    ports:
+      - 9300:8300 
+      - 9301:8301 
+      - 9301:8301/udp 
+      - 9302:8303 
+      - 9302:8302/udp 
+      - 9400:8400 
+      - 9500:8500 
+      - 9600:8600 
+    restart: always
+    command: agent -server -client=0.0.0.0 -retry-join=consul1 -node=consul2 -datacenter=dc1 -data-dir=/tmp/data-dir -client 0.0.0.0 -ui
+    depends_on: 
+      - consul1
+  consul3:
+    image: consul:latest
+    container_name: consul3
+    ports:
+      - 10300:8300 
+      - 10301:8301 
+      - 10301:8301/udp 
+      - 10302:8303 
+      - 10302:8302/udp 
+      - 10400:8400 
+      - 10500:8500 
+      - 10600:8600 
+    restart: always
+    command: agent -server -client=0.0.0.0 -retry-join=consul1 -node=consul3 -datacenter=dc1 -data-dir=/tmp/data-dir -client 0.0.0.0 -ui
+    depends_on: 
+      - consul1
+  consul4:
+    image: consul:latest
+    container_name: consul4
+    ports:
+      - 11300:8300 
+      - 11301:8301 
+      - 11301:8301/udp 
+      - 11302:8303 
+      - 11302:8302/udp 
+      - 11400:8400 
+      - 11500:8500 
+      - 11600:8600 
+    restart: always  
+    command: agent -client=0.0.0.0 -retry-join=consul1 -ui -node=client1 -datacenter=dc1 -data-dir=/tmp/data-dir -client 0.0.0.0 -ui
+    depends_on: 
+      - consul1

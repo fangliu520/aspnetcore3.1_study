@@ -109,9 +109,9 @@ namespace WebCoreTest3._1.Controllers
             //        //r = listPairs[new Random().Next(0, listPairs.Count)];
 
 
-            //        string targetUrl = $"{uri.Scheme}://{r.Value.Address}:{r.Value.Port}{uri.PathAndQuery}";
-            //        content = WebApiHelper.InvokeApi(targetUrl);
-            //        ViewBag.conn = $"{_baseService.Get()}|{content}|请求路径：{targetUrl}";
+            //string targetUrl = $"{uri.Scheme}://{r.Value.Address}:{r.Value.Port}{uri.PathAndQuery}";
+            //content = WebApiHelper.InvokeApi(targetUrl);
+            //ViewBag.conn = $"{_baseService.Get()}|{content}|请求路径：{targetUrl}";
             //    }
             //}
             #endregion
@@ -120,7 +120,7 @@ namespace WebCoreTest3._1.Controllers
 
             //Expression<Func<Student, bool>> expression = e => e.Id == 1 && e.Name.Contains("json") && e.Age > 1;
             //Student mod = _baseService.Get(expression);
-            //_baseService = (IBaseService)_baseService.AOP(typeof(IBaseService));//针对整个接口方法进行AOP
+           // _baseService = (IBaseService)_baseService.AOP(typeof(IBaseService));//针对整个接口方法进行AOP
 
             //// var r=_baseService.Get(expression);
 
@@ -130,28 +130,28 @@ namespace WebCoreTest3._1.Controllers
             //expression = e => e.Name.Contains("李四") && e.Age > 1;
             //PagedResult<Student> students = _baseService.GetPagedResult(new Student(), expression);
 
-            #region redis 测试
+            //#region redis 测试
             //_redis.Add("studentPaged", students);
 
             //PagedResult<Student> modnew = _redis.Get<PagedResult<Student>>("studentPaged");
 
             //批量插入
-            Dictionary<string, string> dic = new Dictionary<string, string>() { { "m_name", "liu1" }, { "m_age", "11" }, { "sex", "男" } };
+            //Dictionary<string, string> dic = new Dictionary<string, string>() { { "m_name", "liu1" }, { "m_age", "11" }, { "sex", "男" } };
 
-            _redis.SetAll(dic);
+            //_redis.SetAll(dic);
 
 
-            Dictionary<string, Student> disStudent = new Dictionary<string, Student>() {
-                { "stud1", new Student() { Name = "小王", Age = 12 } }  ,
-                { "stud2", new Student() { Name = "小王2", Age = 13 } }
-            };
-            _redis.SetAll(disStudent);
-            //批量获取
-            var dics = _redis.GetAll<string>(new string[] { "m_name", "m_age" });
-            var dicstu = _redis.GetAll<Student>(new string[] { "stud1", "stud2" });
-            Console.WriteLine($"Redis 操作成功！");
-            _logger.LogError("LogInformation:" + $"Redis 操作成功！" + DateTime.Now.ToString());
-            #endregion
+            //Dictionary<string, Student> disStudent = new Dictionary<string, Student>() {
+            //    { "stud1", new Student() { Name = "小王", Age = 12 } }  ,
+            //    { "stud2", new Student() { Name = "小王2", Age = 13 } }
+            //};
+            //_redis.SetAll(disStudent);
+            ////批量获取
+            //var dics = _redis.GetAll<string>(new string[] { "m_name", "m_age" });
+            //var dicstu = _redis.GetAll<Student>(new string[] { "stud1", "stud2" });
+            //Console.WriteLine($"Redis 操作成功！");
+            //_logger.LogError("LogInformation:" + $"Redis 操作成功！" + DateTime.Now.ToString());
+            //#endregion
             ////Student mod = _baseService.GetStudent(1);
             ////mod.Name = "";// $"{mod.Name}_insertfdsdweddddddddwewwdcf";
             ////mod.Age = 200;
@@ -171,6 +171,8 @@ namespace WebCoreTest3._1.Controllers
             //expression = e => e.Name.Contains("李四") && e.Age > 1;
             //expression=null;// e=>e.Id>1;
             //ViewBag.DataList = _baseService.GetPagedResult(mod,expression);
+            
+           // ViewBag.conn = Utility.WebApiHelper.InvokeApi("http://localhost:6299/T/user");
             return View();
         }
 
@@ -188,16 +190,17 @@ namespace WebCoreTest3._1.Controllers
         [HttpPost]
         public IActionResult AddRedis(string content)
         {
-            Student stu = new Student()
-            {
-                Name = "liu",
-                Age = 10,
-                Email = content
-            };
+            //Student stu = new Student()
+            //{
+            //    Name = "liu",
+            //    Age = 10,
+            //    Email = content
+            //};
 
 
             //_redis.AddItemToList("redis_listlog", JsonConvert.SerializeObject(stu));
-            _redis.AddItemToList("redis_listlog", content);
+            //_redis.AddItemToList("redis_listlog", content);
+            _redis.PubLishMsg("send_log", content);
 
 
             return Redirect("index");

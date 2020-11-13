@@ -32,7 +32,7 @@ namespace WebApiCoreGateway
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers();
-            var authenticationProviderKey = "UserGatewayKey";
+           // var authenticationProviderKey = "UserGatewayKey";
 
             //services.AddAuthentication("Bearer")
             //.AddIdentityServerAuthentication(authenticationProviderKey, o =>
@@ -68,17 +68,21 @@ namespace WebApiCoreGateway
             //})           
             ;
 
-           
+            
 
             services.AddOcelot()
             .AddConsul()
-            .AddPolly()
-            ;
+            .AddPolly();
+            //解决跨域问题
+            services.AddCors(options => {
+                options.AddPolicy("any", builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {         
+        {
+            app.UseCors("any");
             app.UseOcelot();
             //if (env.IsDevelopment())
             //{

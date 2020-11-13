@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 using System.Threading;
+using AppNetCore.Utility.Redis;
 
 namespace ConsoleAppNetCore3
 {
@@ -28,6 +29,21 @@ namespace ConsoleAppNetCore3
         //private static ConnectionMultiplexer rc = ConnectionMultiplexer.Connect("127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,password=123456");
         static void Main(string[] args)
         {
+
+            RedisClientHelper.MainHelper();
+            //
+            //string cityLimit = "{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}";
+            //string str = "[{\"id\":1,\"cities\":[\"上海\",\"成都\",\"苏州\",\"杭州\",\"长沙\",\"宁波\",\"无锡\",\"南京\",\"北京\",\"天津\",\"重庆\",\"台州\"],\"warnLabel\":\"（满39元免配送费）\",\"minAmount\":39,\"shipCost\":10,\"status\":true,\"allowCoupon\":false,\"allowActivityProducts\":true,\"allowDaijinCard\":true,\"allowNorDaijinCard\":true,\"allowEmpDaijinCard\":true,\"allowBigGiftBag\":true,\"allowExchangeVouchers\":true,\"cityLimit\":{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}}]";
+
+            //var item2 = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(str);
+            //var l = item2[0]["cityLimit"];
+            //var item=  JsonConvert.DeserializeObject<Dictionary<string,Dictionary<string,int>>>(l.ToString());
+
+            //var city = item["南京"];
+            //var ship = city["shipCost"];
+
+
+
 
             //{
             //    new ReflectionCeshi().Test();
@@ -105,6 +121,7 @@ namespace ConsoleAppNetCore3
             #endregion
 
             #region 发布订阅日志消息
+
             //try
             //{
 
@@ -144,7 +161,7 @@ namespace ConsoleAppNetCore3
             //catch (Exception ex)
             //{
             //    Console.WriteLine(ex.Message);
-            //} 
+            //}
             #endregion
             #region redis秒杀功能测试
             //string port; //姓名
@@ -256,15 +273,15 @@ namespace ConsoleAppNetCore3
             //Console.WriteLine(rc.GetAllItemsFromSortedSet(zset_key)); 
             #endregion
 
-            #region list集合 redis常用list
-            Console.WriteLine("Hello World!");
-            string listkey = "redis_listlog";
-            while (1 == 1)
-            {
-                Console.WriteLine("请输入发送的内容");
-                var message = Console.ReadLine();
-                rc.AddItemToList(listkey, message);
-            }
+            //#region list集合 redis常用list
+            //Console.WriteLine("Hello World!");
+            //string listkey = "redis_listlog";
+            //while (1 == 1)
+            //{
+            //    Console.WriteLine("请输入发送的内容");
+            //    var message = Console.ReadLine();
+            //    rc.AddItemToList(listkey, message);
+            //}
             //string list_key = "mjd_list_1";
             //List<string> lists = new List<string>();
             //for (int i = 10; i > 0; i--)
@@ -286,7 +303,7 @@ namespace ConsoleAppNetCore3
 
             //foreach (string str in infos)
             //    Console.WriteLine(str); 
-            #endregion
+            //#endregion
 
             #region redis集合并集
             //rc.AddRangeToSet("keyone", new List<string>() { "001", "002", "003" });

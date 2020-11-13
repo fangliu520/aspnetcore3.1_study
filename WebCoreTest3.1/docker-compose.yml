@@ -1,0 +1,98 @@
+version: "3.7"
+services:
+  webapiuser1:
+    build:
+      context: /home/project/webapi_user
+    image: webapi_user
+    ports:
+      - 5026:80/tcp
+    volumes:
+      - /home/project/config/appsettings5026.json:/app/appsettings.json
+    container_name: webapiuser1
+  webapiuser2:
+    image: webapi_user
+    ports:
+      - 5027:80/tcp
+    command: ["dotnet", "/app/WebApiCore.dll"]
+    volumes:
+      - /home/project/config/appsettings5027.json:/app/appsettings.json
+    container_name: webapiuser2
+  webapiuser3:
+    image: webapi_user
+    ports:
+      - 5028:80/tcp
+    command: ["dotnet", "/app/WebApiCore.dll"]
+    volumes:
+      - /home/project/config/appsettings5028.json:/app/appsettings.json
+    container_name: webapiuser3
+
+  webapiproduct1:
+    build:
+      context: /home/project/webapi_product
+    image: webapi_product
+    ports:
+      - 6026:80/tcp
+    volumes:
+      - /home/project/config/appsettings6026.json:/app/appsettings.json
+    container_name: webapiproduct1
+  webapiproduct2:
+    image: webapi_product
+    ports:
+      - 6027:80/tcp
+    command: ["dotnet", "/app/WebApiProduct.dll"]
+    volumes:
+      - /home/project/config/appsettings6027.json:/app/appsettings.json
+    container_name: webapiproduct2
+  webapiproduct3:
+    image: webapi_product
+    ports:
+      - 6028:80/tcp
+    command: ["dotnet", "/app/WebApiProduct.dll"]
+    volumes:
+      - /home/project/config/appsettings6028.json:/app/appsettings.json
+    container_name: webapiproduct3  
+ 
+  webapigateway1:
+    build:
+      context: /home/project/webapi_gateway
+    image: webapi_gateway
+    ports:
+      - 6299:80/tcp
+    volumes:
+      - /home/project/config/configuration6299.json:/app/configuration.json
+    container_name: webapigateway1
+  webapigateway2:
+    image: webapi_gateway
+    ports:
+      - 6399:80/tcp
+    command: ["dotnet", "/app/WebApiCoreGateway.dll"]
+    volumes:
+      - /home/project/config/configuration6399.json:/app/configuration.json
+    container_name: webapigateway2
+  webapigateway3:
+    image: webapi_gateway
+    ports:
+      - 6499:80/tcp
+    command: ["dotnet", "/app/WebApiCoreGateway.dll"]
+    volumes:
+      - /home/project/config/configuration6499.json:/app/configuration.json
+    container_name: webapigateway3
+    
+  consulnginx:
+    image: nginx:latest
+    ports: 
+      - 8089:80/tcp
+    volumes: 
+      - /home/project/consulnginx/:/var/log/nginx/
+      - /home/project/consulnginx/nginx.conf:/etc/nginx/nginx.conf 
+    container_name: consulnginx
+
+  gatewaynginx:
+    image: nginx:latest
+    ports: 
+      - 8088:80/tcp
+    volumes: 
+      - /home/project/gatewaynginx/:/var/log/nginx/
+      - /home/project/gatewaynginx/nginx.conf:/etc/nginx/nginx.conf 
+    container_name: gatewaynginx
+  

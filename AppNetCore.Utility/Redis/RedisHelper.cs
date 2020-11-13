@@ -45,8 +45,8 @@ namespace AppNetCore.Utility.Redis
         public void SetAll<T>(Dictionary<string, T> dic)
         {
             using (RedisClient rc = new RedisClient(_option.Server, _option.Port, _option.Password))
-            {               
-                    rc.SetAll<T>(dic);
+            {
+                rc.SetAll<T>(dic);
             }
         }
         //批量获取
@@ -54,7 +54,7 @@ namespace AppNetCore.Utility.Redis
         {
             using (RedisClient rc = new RedisClient(_option.Server, _option.Port, _option.Password))
             {
-               return rc.GetAll<T>(keys);
+                return rc.GetAll<T>(keys);
             }
         }
 
@@ -122,10 +122,92 @@ namespace AppNetCore.Utility.Redis
         {
             using (RedisClient rc = new RedisClient(_option.Server, _option.Port, _option.Password))
             {
-                 rc.AddItemToList(listId,value);
+                rc.AddItemToList(listId, value);
             }
 
         }
+
+
+        #endregion
+
+        #region 发布订阅消息（基于redis）
+        /// <summary>
+        /// 订阅者，一般用于窗体应用开发、或者windows 服务在进程中一直运行接收消息
+        /// </summary>
+        /// <param name="channel"></param>
+        public void SubscribeMsg(string channel)
+        {
+            try
+            {
+                RedisClient rc = new RedisClient(_option.Server, _option.Port, _option.Password);
+                Console.WriteLine("创建订阅信息文本");
+                var subscription = rc.CreateSubscription();
+                subscription.OnMessage = (channelRedis, msgRedis) =>
+                {
+                    //开始编写业务逻辑……
+                    if (msgRedis != "CTRL:PULSE")
+                    {
+                        Console.WriteLine($"从频道{channelRedis}上接收消息：{msgRedis},时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss")}");
+                        Console.WriteLine("———————记录成功——————————————");
+                    }
+                };
+                //开始订阅
+                subscription.OnSubscribe = (channelRedis) =>
+                {
+                    Console.WriteLine($"订阅客户端：开始订阅{channelRedis}");
+                };
+                //取消订阅
+                subscription.OnUnSubscribe = (a) =>
+                {
+                    Console.WriteLine($"订阅客户端：取消订阅{a}");
+                };
+                subscription.SubscribeToChannels(channel);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}|{ex.StackTrace}");
+            }
+
+        }
+
+        public void PubLishMsg(string channel, string msg)
+        {
+            try
+            {
+
+                Console.WriteLine("发布服务");
+                IRedisClientsManager redisClients = new PooledRedisClientManager($"{_option.Password}@{_option.Server}:{_option.Port}");              
+                RedisPubSubServer redisPubSub = new RedisPubSubServer(redisClients, channel)
+                //{
+                //    //OnMessage = (channel, msg) =>
+                //    //{
+                //    //    Console.WriteLine($"从频道{channel}上接收消息：{msg},时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss")}");
+                //    //    Console.WriteLine("————————————————————————————");
+                //    //},
+                //    OnStart = () =>
+                //    {
+                //        Console.WriteLine("————————发布服务已启动————————————");
+
+
+                //    }
+                //    ,
+                //    OnStop = () => { Console.WriteLine("发布服务停止"); },
+                //    OnUnSubscribe = c => { Console.WriteLine(c); },
+                //    OnError = e => { Console.WriteLine(e.Message); },
+                //    OnFailover = s => { Console.WriteLine(s); }
+
+                //}
+                ;
+                redisPubSub.Start();
+                redisClients.GetClient().PublishMessage(channel, msg);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         #endregion
     }
 }
