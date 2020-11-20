@@ -6,6 +6,9 @@
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.9" />
     <PackageReference Include="ServiceStack.Redis" Version="5.9.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.1.58" />

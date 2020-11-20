@@ -46,7 +46,9 @@ namespace AppNetCore.Utility.CustomAop
         {
             return () =>
             {
+                //去执行真实逻辑
                 Console.WriteLine($"This is LogBeforeAttribute,MethodName:{invocation.Method.Name},1");
+               // invocation.ReturnValue = "失败！";
                 action.Invoke();
                 Console.WriteLine($"This is LogBeforeAttribute,MethodName:{invocation.Method.Name},2");
 
@@ -60,6 +62,7 @@ namespace AppNetCore.Utility.CustomAop
         {
             return () =>
             {
+                //去执行真实逻辑
                 Console.WriteLine($"This is LogAfterAttribute,MethodName:{invocation.Method.Name},1");
                 action.Invoke();
                 Console.WriteLine($"This is LogAfterAttribute,MethodName:{invocation.Method.Name},2");
@@ -97,7 +100,7 @@ namespace AppNetCore.Utility.CustomAop
         /// <param name="invocation"></param>
         protected override void PreProceed(IInvocation invocation)
         {
-            Console.WriteLine($"调用前拦截器，方法名称{invocation.Method.Name}");   
+            Console.WriteLine($"调用前拦截器，方法名称{invocation.Method.Name}");           
         }
         /// <summary>
         /// 拦截的方法返回时调用的拦截器

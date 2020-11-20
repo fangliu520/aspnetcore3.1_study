@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using IdentityServer4;
+using WebApiAuthentication.Utility;
+
 namespace WebApiAuthentication
 {
     public class Startup
@@ -24,6 +26,7 @@ namespace WebApiAuthentication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IJWTService, JWTService>();
             services.AddControllers();
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()

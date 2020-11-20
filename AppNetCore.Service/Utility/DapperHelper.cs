@@ -170,9 +170,10 @@ namespace AppNetCore.Service.Utility
         public bool Insert<T>(T t) where T : BaseModel, new()
         {
             Type type = typeof(T);
-            if (!DataValidateExtend.ValidateModel(t))
+            Tuple<bool, string> item = DataValidateExtend.ValidateModel(t);
+            if (!item.Item1)
             {
-                string msg = DataValidateExtend.ErrorMsg;
+                string msg = item.Item2;
                 return false;
             }
 

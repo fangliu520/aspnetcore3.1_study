@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using WebApiCore.Utility.Filter;
 
 namespace WebApiCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[ResourceFilter]
     public class UserController : ControllerBase
     {
         private readonly IConfiguration _configuration;

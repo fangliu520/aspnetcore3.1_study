@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,12 @@ namespace WebCoreTest3._1.Utility.Filter
         public void OnActionExecuting(ActionExecutingContext context)
         {
             Console.WriteLine($"This is {typeof(ActionFilterAttribute)} OnActionExecuting");
+            context.Result= new JsonResult(new
+            {
+
+                Result = true,
+                Msg = "发生异常，请联系管理员！"
+            });
         }
     }
 }

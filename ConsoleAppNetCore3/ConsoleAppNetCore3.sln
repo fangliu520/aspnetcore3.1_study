@@ -27,15 +27,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Utility", "..\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppServer", "..\ConsoleAppServer\ConsoleAppServer.csproj", "{FD474A55-8ABB-4A54-B7F6-099E94355741}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreTest_ELK_Logstash_File", "..\WebCoreTest_ELK_Logstash_File\WebCoreTest_ELK_Logstash_File.csproj", "{A21849C0-9EE9-4913-9C2F-5B9B642A5E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_File", "..\WebCoreTest_ELK_Logstash_File\WebCoreTest_ELK_Logstash_File.csproj", "{A21849C0-9EE9-4913-9C2F-5B9B642A5E4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreTest_ELK_Logstash_TCP", "..\WebCoreTest_ELK_Logstash_TCP\WebCoreTest_ELK_Logstash_TCP.csproj", "{138C7DE6-29D6-456F-B163-40F194DC956D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_TCP", "..\WebCoreTest_ELK_Logstash_TCP\WebCoreTest_ELK_Logstash_TCP.csproj", "{138C7DE6-29D6-456F-B163-40F194DC956D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreTest_ELK_Logstash_Redis", "..\WebCoreTest_ELK_Logstash_Redis\WebCoreTest_ELK_Logstash_Redis.csproj", "{3499B22C-3747-4140-BC80-8CDEA335DFA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_Redis", "..\WebCoreTest_ELK_Logstash_Redis\WebCoreTest_ELK_Logstash_Redis.csproj", "{3499B22C-3747-4140-BC80-8CDEA335DFA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreTest_ELK_Elasticsearch", "..\WebCoreTest_ELK_Elasticsearch\WebCoreTest_ELK_Elasticsearch.csproj", "{DE5290F2-9505-42C6-9399-A1D503E2EA7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Elasticsearch", "..\WebCoreTest_ELK_Elasticsearch\WebCoreTest_ELK_Elasticsearch.csproj", "{DE5290F2-9505-42C6-9399-A1D503E2EA7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppDocker", "..\WebAppDocker\WebAppDocker.csproj", "{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppDocker", "..\WebAppDocker\WebAppDocker.csproj", "{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreIOC", "..\WebCoreIOC\WebCoreIOC.csproj", "{5775603A-1320-4674-B88B-B5B1DD2C2A9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5775603A-1320-4674-B88B-B5B1DD2C2A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5775603A-1320-4674-B88B-B5B1DD2C2A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5775603A-1320-4674-B88B-B5B1DD2C2A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5775603A-1320-4674-B88B-B5B1DD2C2A9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

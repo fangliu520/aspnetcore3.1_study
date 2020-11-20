@@ -21,3 +21,23 @@
         </div>
     </form>
 </div>
+
+<div>
+    请求数据： <div id="result"></div>
+
+</div>
+
+<script>
+    $(function () {
+        $.ajax({
+            type: "Get",
+            data: [],
+            url: "http://localhost:5126/api/products",
+            success: function (res) {
+                $("#result").text(res);
+
+            }
+        });
+    });
+
+</script>

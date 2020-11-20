@@ -26,9 +26,33 @@ namespace AppNetCore.Utility.Validate
 {
     public static class DataValidateExtend 
     {
-      public static string ErrorMsg { get; set; }
-        public static bool ValidateModel<T>(this T t)
-        {            
+        //public static string ErrorMsg { get; set; }//这种静态变量写法会导致多线程安全问题
+        //  public static bool ValidateModel<T>(this T t)
+        //  {            
+        //      Type type = typeof(T);
+
+        //      foreach (var prop in type.GetProperties())
+        //      {
+        //          if (prop.IsDefined(typeof(BaseValidateAttribute), true))
+        //          {
+        //              object oValue = prop.GetValue(t);
+        //              var attributeList = prop.GetCustomAttributes<BaseValidateAttribute>();
+        //              foreach (var attribute in attributeList)
+        //              {
+        //                  if (!attribute.Validate(oValue))
+        //                  {
+        //                      ErrorMsg = $"{prop.Name}{attribute.ErrorMsg}";
+        //                      return false;
+        //                  }
+        //              }
+
+        //          }
+        //      }
+        //      return true;
+        //  }
+
+        public static Tuple<bool, string> ValidateModel<T>(this T t)
+        {
             Type type = typeof(T);
 
             foreach (var prop in type.GetProperties())
@@ -41,14 +65,14 @@ namespace AppNetCore.Utility.Validate
                     {
                         if (!attribute.Validate(oValue))
                         {
-                            ErrorMsg = attribute.ErrorMsg;
-                            return false;
+                            return new Tuple<bool, string>(false, $"{prop.Name}{attribute.ErrorMsg}");
                         }
                     }
 
                 }
             }
-            return true;
+            return new Tuple<bool, string>(true, ""); 
         }
+       
     }
 }

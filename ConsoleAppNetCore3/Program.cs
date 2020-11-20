@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using StackExchange.Redis;
 using System.Threading;
 using AppNetCore.Utility.Redis;
+using AppNetCore.Utility.ConfigFile;
 
 namespace ConsoleAppNetCore3
 {
@@ -30,10 +31,13 @@ namespace ConsoleAppNetCore3
         static void Main(string[] args)
         {
 
-            RedisClientHelper.MainHelper();
-            //
-            //string cityLimit = "{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}";
-            //string str = "[{\"id\":1,\"cities\":[\"上海\",\"成都\",\"苏州\",\"杭州\",\"长沙\",\"宁波\",\"无锡\",\"南京\",\"北京\",\"天津\",\"重庆\",\"台州\"],\"warnLabel\":\"（满39元免配送费）\",\"minAmount\":39,\"shipCost\":10,\"status\":true,\"allowCoupon\":false,\"allowActivityProducts\":true,\"allowDaijinCard\":true,\"allowNorDaijinCard\":true,\"allowEmpDaijinCard\":true,\"allowBigGiftBag\":true,\"allowExchangeVouchers\":true,\"cityLimit\":{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}}]";
+            var conn_w = ConfigurationManager.GetNode("ConnectionString:WriteConnection");
+            var conn_read=  ConfigurationManager.GetNode("ConnectionString:ReadConnectionList:0");
+            string s = conn_read;
+           // RedisClientHelper.MainHelper();
+           //
+           //string cityLimit = "{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}";
+           //string str = "[{\"id\":1,\"cities\":[\"上海\",\"成都\",\"苏州\",\"杭州\",\"长沙\",\"宁波\",\"无锡\",\"南京\",\"北京\",\"天津\",\"重庆\",\"台州\"],\"warnLabel\":\"（满39元免配送费）\",\"minAmount\":39,\"shipCost\":10,\"status\":true,\"allowCoupon\":false,\"allowActivityProducts\":true,\"allowDaijinCard\":true,\"allowNorDaijinCard\":true,\"allowEmpDaijinCard\":true,\"allowBigGiftBag\":true,\"allowExchangeVouchers\":true,\"cityLimit\":{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}}]";
 
             //var item2 = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(str);
             //var l = item2[0]["cityLimit"];

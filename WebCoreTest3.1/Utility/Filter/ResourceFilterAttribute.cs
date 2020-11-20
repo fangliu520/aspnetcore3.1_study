@@ -16,13 +16,22 @@ namespace WebCoreTest3._1.Utility.Filter
     {
         public int Order => 0;
 
+        private static Dictionary<string, object> dic = new Dictionary<string, object>();
         public void OnResourceExecuted(ResourceExecutedContext context)
         {
+            //操作一个缓存实例
+            string key = context.HttpContext.Request.Path;
+            dic[key] = context.Result;
             Console.WriteLine($"This is {typeof(ResourceFilterAttribute)} OnResourceExecuted");
         }
 
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
+            string key = context.HttpContext.Request.Path;
+            if (dic.ContainsKey(key))
+            {
+                context.Result = (IActionResult)dic[key];
+            }
             Console.WriteLine($"This is {typeof(ResourceFilterAttribute)} OnResourceExecuting");
         }
     }
