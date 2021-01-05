@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <!--作用域插槽使用
+            cpn7 把子组件的数据传入父组件中并按照一定顺序排列 子组件： <slot :data="laguageArray"> 父组件   <template slot-scope="slot">
+            
+          -->
+        <cpn7></cpn7>
+        <cpn7>
+            <template slot-scope="slot">
+                <span>{{slot.data.join(' - ')}}</span>
+            </template>
+        </cpn7>
+        <cpn7>
+            <div slot-scope="slot">
+                <span>{{slot.data.join(' * ')}}</span>
+            </div>
+        </cpn7>
+        <hr />
+        <cpnone :number1="num1" @num1changed="num1change" :number2="num2" @num2changed="num2change"></cpnone>
+        <
+        <cpn v-bind:cmovies="movies" v-bind:cmessage="message" :child-my-message="title" @itemclick="cpnClick" ref="aaa"></cpn><!--驼峰命名法-->
+
+        <button @click="btnClick">按钮</button>
+        <hr />
+        <cpn5><button>插槽按钮</button></cpn5>
+        <cpn5><span>我是标签</span></cpn5>
+        <cpn5><input type="text" value="11" /></cpn5>
+        <cpn5>
+            <a href="javascript:void(0)" slot="left"><</a>
+            <span slot="center">搜索：<input type="text" placeholder="请输入要搜索的内容" /></span>
+            <span slot="right">贝思客</span>
+        </cpn5>
+
+
+    </div>
+
+    <template id="cpn7">
+        <div>
+            <slot :data="laguageArray">
+                <ul>
+                    <li v-for="item in laguageArray">{{item}}</li>
+                </ul>
+            </slot>
+        </div>
+    </template>
+
+
+    <template id="cpn5">
+        <div>
+            <h2>我是组件cpn5</h2>
+            <p>我是内容</p>
+            <slot name="left">左边</slot>
+            <slot name="center">中间</slot>
+            <slot name="right">右边</slot>
+        </div>
+       
+    </template>
+
+    <template id="cpn1">
+        <div>
+            <h2>props：{{number1}}</h2>
+            <h2>data：{{dnumber1}}</h2>
+            <input type="text" v-model:value="dnumber1" @input="numInput" />
+
+            <h2>props：{{number2}}</h2>
+            <h2>data：{{dnumber2}}</h2>
+            <input type="text" :value="dnumber2" @input="numInput2" /> <!--注：这里不是双向绑定v-model 等价于 ：value v-on:input，双向绑定直接是 v-model="dnumber"-->
+        </div>
+    </template>
+
+    <template id="cpn">
+        <div>
+            <ul v-for="item in cmovies">
+                <li>{{item}}</li>
+            </ul>
+            <h2>{{cmessage}}</h2>
+
+            <h2>{{childMyMessage}}</h2>
+
+            <ul v-for="item in cateGories">
+                <li>
+                    {{item.id}}-{{item.name}}
+                    <button @click="selectClick(item)">选择</button>
+                </li>
+            </ul>
+            <hr />
+            <cpn6></cpn6>
+        </div>
+    </template>
+
+    <template id="ccpn">
+        <div>
+            <h2>我是子组件</h2>
+            <button @click="btnClick">组件按钮</button>
+        </div>
+    </template>
+</body>
+</html>
+<script>
+    const cpnc1 = {
+        template: "#cpn1",
+        props: {
+            number1: Number,
+            number2: Number
+        },
+        data() {
+            return {
+                dnumber1: this.number1,
+                dnumber2: this.number2
+            }
+        },
+        methods: {
+            numInput(event) {
+                this.dnumber1 = event.target.value;
+
+                this.$emit("num1changed", this.dnumber1);
+
+                this.dnumber2 = this.dnumber1 * 100;
+                this.$emit("num2changed", this.dnumber2);
+            },
+            numInput2(event) {
+                this.dnumber2 = event.target.value;
+                this.$emit("num2changed", this.dnumber2);
+
+                this.dnumber1 = this.dnumber2 / 100;
+                this.$emit("num1changed", this.dnumber1);
+            }
+        }
+    };
+
+    {//子组件
+        //const cpnc = {
+        //    template: "#cpn",
+        //    // props: ["cmovies", "cmessage"], 第一种写法
+        //    //props: { //第二种写法
+        //    //    cmovies: Array,
+        //    //    cmessage:String
+        //    //},
+        //    props: {//第三种写法
+        //        cmovies: {
+        //            type: Array,
+        //            defualt() {
+        //                return [];
+        //            },
+        //            required: true
+        //        },
+        //        cmessage: {
+        //            type: String,
+        //            default() {
+        //                return "aaa";
+        //            }
+        //        },
+        //        childMyMessage: {
+        //            type: String,
+        //            default() {
+        //                return "";
+        //            }
+        //        }
+        //    },
+        //    data() {
+        //        return {
+        //            cateGories: [
+        //                { id: 1, name: "热门推荐" },
+        //                { id: 2, name: "书籍" },
+        //                { id: 3, name: "手机数码" }
+        //            ]
+
+        //        };
+        //    },
+        //    methods: {
+        //        selectClick(item) {
+        //            //console.log(item);
+        //            this.$emit("itemclick", item);//自定义事件 子组件传数据=>父组件
+        //        }
+        //    }
+
+        //}
+    }
+    //父组件
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "你好，中国",
+            title: "驼峰命名法",
+            movies: ["《大话西游》", "《哪吒》", "《姜子牙》"],
+            num1: 1,
+            num2: 0
+        },
+        methods: {
+            cpnClick(item) {
+                console.log("我是子组件=>父组件", item);
+            },
+            num1change(val) {
+                this.num1 = parseFloat(val);
+
+            },
+            num2change(val) {
+                this.num2 = parseFloat(val);
+            },
+            btnClick() {
+                //父组件调用子组件
+                //console.log(this.$children);
+                //console.log(this.$children[0].dnumber1);
+                // 组件上加一个 ref 属性
+                console.log(this.$refs.aaa.cmessage);
+
+            }
+        },
+        components: {//局部组件
+            cpn: {
+                template: "#cpn",
+                // props: ["cmovies", "cmessage"], 第一种写法
+                //props: { //第二种写法
+                //    cmovies: Array,
+                //    cmessage:String
+                //},
+                props: {//第三种写法
+                    cmovies: {
+                        type: Array,
+                        defualt() {
+                            return [];
+                        },
+                        required: true
+                    },
+                    cmessage: {
+                        type: String,
+                        default() {
+                            return "aaa";
+                        }
+                    },
+                    childMyMessage: {
+                        type: String,
+                        default() {
+                            return "";
+                        }
+                    }
+                },
+                data() {
+                    return {
+                        cateGories: [
+                            { id: 1, name: "热门推荐" },
+                            { id: 2, name: "书籍" },
+                            { id: 3, name: "手机数码" }
+                        ]
+                    };
+                },
+                methods: {
+                    selectClick(item) {
+                        //console.log(item);
+                        this.$emit("itemclick", item);//自定义事件 子组件传数据=>父组件
+                    }
+                },
+                components: {
+                    cpn6: {
+                        template: '#ccpn',
+                        data() {
+                            return {
+                                title: "我是子组件",
+                                count: 0
+                            };
+                        },
+                        methods: {
+                            btnClick: function () {
+                                console.log(this.$parent);//调用的父组件是cpn
+                                console.log(this.$parent.cateGories);
+                                //$root根组件
+                                console.log(this.$root.message,this.$root.title);
+                            }
+
+                        }
+                    }
+                }
+
+            },
+            cpnone: cpnc1,
+            cpn5: {
+                template: "#cpn5",
+                data() {
+                    return {};
+                }
+            },
+            cpn7: {
+                template: "#cpn7",
+                data() {
+                    return {
+                        laguageArray:["PYTHON","JAVA","C#"]
+                    };
+                }
+            }
+
+        }
+
+    });
+</script>

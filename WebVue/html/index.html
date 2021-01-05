@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .active { color: red; }
+        .handlep { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-cloak>
+            <!--@*v-cloak 指令作用在 vue解析前 有一个v-cloak属性，并且 {{message}}不显示，解析后 v-cloak属性消失，{{message}}被替换成实际值*@-->
+            {{message}}：{{counter}}
+        </div>
+        <!--<button v-on:click="incr">+</button>
+        <button v-on:click="decr">
+            _</button>
+            <br />-->
+        <button @click="incr">+</button>
+        <button @click="decr">_</button>
+
+        <div>
+            <ul>
+                <li v-for="(m,index) in movies" :class="{active:indexcurrent===index}" @click="clickindex(index)">{{index}}-{{m}}</li>
+            </ul>
+
+            <ul>
+                <li v-for="(m,index) in fruits" v-on:click="getindex(index)" v-bind:class="{active:m.isshow}">{{index}}-{{m.name}}</li>
+            </ul>
+
+            <ul>
+                <li v-for="m in fruits" v-on:click="changecolorli(m)" v-bind:class="{active:m.isshow}">{{m.name}}--{{m.isshow}}</li>
+            </ul>
+        </div>
+        <div v-once> {{once}}</div>
+        <h3 v-html="urlhtml"></h3>
+        <div v-text="message"></div>
+        <div v-pre> {{message}}</div>
+        <a v-bind:href="url">百度v-bind</a>
+        <a :href="url">百度v-bind</a>
+        <!--动态绑定对象语法-->
+        <div v-bind:class="{active:isactive,line:isline}" v-on:click="changecolor" class="handlep">{{message}}</div>
+
+        <!--动态绑定对象语法 友好写法-->
+        <div v-bind:class="getClass()" v-on:click="changecolor" class="handlep">{{message}}</div>
+
+        <div>{{fullname}}</div><!--@*//计算属性*@-->
+
+        <div>{{getfullname()}}</div> <!--@*调用方法*@-->
+
+        <div>
+            <button @click="handleEvent('12',$event)"> 按钮0</button>
+            <button @click="handleEventOne('12')"> 按钮1</button>
+            <button @click="handleEventTwo"> 按钮2</button>
+            <button> 按钮3</button>
+        </div>
+
+        事件冒泡：
+        <!-- 阻止单击事件继续传播 -->
+        <div @click="divclick">
+            <button @click.stop="btnclick">冒泡</button>
+        </div>
+        <form action="baidu">
+            <div>
+                <input type="submit" value="提交" @click.stop.prevent="submitFun" />
+            </div>
+        </form>
+        <input type="text" @keyup.enter="keyup" />
+        <input type="text" @keyup.enter.once="keyup" /> <!--once只响应一次-->
+
+        <h2 v-if="score>=90">优秀</h2>
+        <h2 v-else-if="score>=80">良好</h2>
+        <h2 v-else-if="score>=70">良</h2>
+
+        <div>
+            <span v-if="isuser">
+                <label for="username">用户账号</label>
+                <input type="text" id="username" placeholder="用户账号" key="name" />
+            </span>
+            <span v-else>
+                <label for="email">用户邮箱</label>
+                <input type="text" id="email" placeholder="用户邮箱" key=" email" />
+            </span>
+            <button @click="isuser = !isuser">切换</button>
+        </div>
+        <!--当显示与隐藏之间需要频繁切换时，用v-show
+        当只有一次切换时，用v-if-->
+        <h2 v-show="isuser"> v-show</h2>
+        <ul>
+            <li v-for=" item in movies" :key="item">{{item}}</li>
+        </ul>
+        <button @click="btnclickone">点击响应式</button>
+        <ul>
+            <li v-for=" item in birds" :key="item">{{item}}</li>
+        </ul>
+        <ul>
+            <li v-for=" (value,key) in birds">{{key}}-{{value}}</li>
+        </ul>
+        <ul>
+            <li v-for=" (value,key,index) in birds">{{index}}-{{key}}-{{value}}</li>
+        </ul>
+
+        <!--v-model 双向绑定-->
+        <input type="text" v-model="message" />{{message}}
+        <!--v-model 等价于 ：value v-on:input-->
+        <input type="text" :value="message" @input="valuechange" />{{message}}
+
+        <input type="text" :value="message" @input="message=$event.target.value" />{{message}}
+        <br />
+        <!--v-model radio-->
+
+        <label for="male"> <input type="radio" id="male" value="男" v-model="sex" name="sex" />男</label>
+        <label for="female"> <input type="radio" id="female" value="女" v-model="sex" name="sex" />女</label>
+        <h2>
+            你选择的性别： {{sex}}
+        </h2>
+
+        <!--复选框单选-->
+        <label for="agree">
+            <input type="checkbox" id="agree" v-model="isAgree" />同意协议
+        </label>
+        <h2>
+            你选择： {{isAgree}}
+        </h2>
+        <button :disabled="!isAgree">下一步</button>
+
+        <br />
+        <!--复选框多选-->
+        <label for="hobbits1">
+            <input type="checkbox" id="hobbits1" v-model="hobbits" value="篮球" />篮球
+        </label>
+        <label for="hobbits2">
+            <input type="checkbox" id="hobbits2" v-model="hobbits" value="足球" />足球
+        </label>
+        <label for="hobbits3">
+            <input type="checkbox" id="hobbits3" v-model="hobbits" value="羽毛球" />羽毛球
+        </label>
+        <h2>
+            你选择： {{hobbits}}
+        </h2>
+        <br />
+
+        <label v-for="item in originHobbies" :for="item">
+            <input type="checkbox" :value="item" v-model="hobbits" :id="item" />{{item}}
+        </label>
+        <h2>
+            你选择： {{hobbits}}
+        </h2>
+        <br />
+        <!--select 选择一个-->
+
+        <select v-model="fruit">
+            <option value="苹果">苹果</option>
+            <option value="梨子">梨子</option>
+            <option value="香蕉">香蕉</option>
+        </select>
+        <h2>
+            你选择： {{fruit}}
+        </h2>
+
+        <!--select 选择多个-->
+
+        <select v-model="fruites" multiple>
+            <option value="苹果">苹果</option>
+            <option value="梨子">梨子</option>
+            <option value="香蕉">香蕉</option>
+        </select>
+        <h2>
+            你选择： {{fruites}}
+        </h2>
+
+
+        没有修饰符lazy： <input type="text" v-model="nolazymsg" />{{nolazymsg}}
+        修饰符：lazy： <input type="text" v-model.lazy="lazymsg" />{{lazymsg}}
+        <br />
+
+        没有修饰符：number：<input type="number" v-model="age" />{{age}}--{{typeof age}}
+        修饰符：number：<input type="number" v-model.number="agenumber" />{{agenumber}}--{{typeof agenumber}}
+        <br />
+        去除空格trim
+        <input type="text" v-model.trim="nolazymsg" />{{nolazymsg}}
+
+        <br /><hr />
+        组件：
+        <div>
+            <cpn></cpn>
+            <cpn></cpn>
+            <cpn></cpn>
+        </div>
+    </div>
+    <br /><hr />
+    组件app2：
+    <div id="app2">
+        <cpn></cpn>
+        <cpn></cpn>
+
+        <br /><hr />
+        父子组件：
+        <cpn2></cpn2>
+
+        <cpn3></cpn3>
+        <cpn4></cpn4>
+
+        <br /><hr />
+        组件的抽离写法：
+        <!--  <cpn5></cpn5>-->
+        <cpn6></cpn6>
+        <cpn6></cpn6>
+        <!--抽离第一种写法：-->
+        <!--<script type="text/x-template" id="cpnC5">
+            <div>
+                <h4>{{title}}</h4>
+                <p>我是组件cpn5内容……</p>
+            </div>
+        </script>-->
+        <!--抽离第二种写法：-->
+        <script type="text/x-template" id="cpnC6">
+            <!-- <template id="cpnC6">-->
+
+            <div>
+                <h3>计数器：{{count}}</h3>
+                <button @click="decr">-</button>
+                <button @click="incr">+</button>
+            </div>
+
+            <!--</template>-->
+        </script>
+    </div>
+    <script>
+        //Vue.component('cpn6', {
+        //    template: '#cpnC6',
+        //    data() {
+        //        return {
+        //            title: "我是组件6标题",
+        //            count: 0
+        //        };
+        //    },
+        //    methods: {
+        //        incr: function () {
+        //            this.count++;
+        //        },
+        //        decr: function () {
+        //            this.count--;
+        //        }
+        //    }
+        //});
+        //子组件
+        const cpnC1 = Vue.extend({
+            template: `<div>
+                                                                                                 <h4>我是标题cpnC1</h4>
+                                                                                                 <p>我是组件cpnC1内容……</p>
+                                                                                              </div>`
+        });
+        //cpnC2父组件
+        const cpnC2 = Vue.extend({
+            template: `<div>
+                                                                                                 <h4>我是标题cpnC2</h4>
+                                                                                                 <p>我是组件cpnC2内容……</p>
+                                                                                                  <cpn1></cpn1>
+                                                                                              </div>`,
+            components: {
+                cpn1: cpnC1
+            }
+        });
+        //主键语法糖
+
+        Vue.component('cpn3', {
+            template: `<div>
+                                                                                                 <h4>我是全局组件标题cpn3</h4>
+                                                                                                 <p>我是组件cpn3内容……</p>
+                                                                                              </div>`
+        });
+        //组件
+        //1、创建组件构造器
+        const cpnc = Vue.extend({
+            template: `
+                                                                                              <div>
+                                                                                                 <h4>我是标题</h4>
+                                                                                                 <p>我是组件内容……</p>
+                                                                                              </div>`,
+
+        });
+        //2、注册组件（全局组件，意味着可以再多个vue实例下面使用）
+        Vue.component('cpn', cpnc);
+
+
+    </script>
+    <script>
+        const app2 = new Vue({
+            el: "#app2",
+            data: {
+                msg: "你好，中国",
+                title: ""
+            },
+            components: {//局部组件
+                cpn: cpnc,
+                cpn2: cpnC2,
+                cpn4: {
+                    template: `
+                                                                                              <div>
+                                                                                                 <h4>我是局部组件标题cpn4</h4>
+                                                                                                 <p>我是组件cpn4内容……</p>
+                                                                                              </div>`
+                },
+                cpn5: {
+                    template: "#cpnC5",
+                    data() {
+                        return {
+                            title: "我是组件标题"
+                        };
+                    }
+                },
+                cpn6: {
+                    template: '#cpnC6',
+                    data() {
+                        return {
+                            title: "我是组件6标题",
+                            count: 0
+                        };
+                    },
+                    methods: {
+                        incr: function () {
+                            this.count++;
+                        },
+                        decr: function () {
+                            this.count--;
+                        }
+                    }
+                }
+            }
+
+        });
+    </script>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '计数器!',
+                movies: ['A', 'B', 'C', 'D'],
+                counter: 0,
+                once: "加载一次 ",
+                urlhtml: "<a href='http://www.baidu.com'>百度</a>",
+                url: "http://www.baidu.com",
+                isactive: true,
+                isline: true,
+                fruits: [{ name: "苹果", isshow: false }, { name: "梨子", isshow: false }, { name: "香蕉", isshow: false }],
+                firstname: "liu",
+                lastname: "fang",
+                score: 78,
+                isuser: true,
+                birds: {
+                    name: "鹦鹉",
+                    color: "金黄色",
+                    age: 6
+                },
+                indexcurrent: 0,
+                sex: '男',
+                isAgree: false,
+                hobbits: [],
+                fruit: "苹果",
+                fruites: [],
+                originHobbies: ["篮球", "足球", "羽毛球", "乒乓球"],
+                age: 0,
+                agenumber: 0,
+                lazymsg: "",
+                nolazymsg: ""
+
+
+            },
+            methods: {
+                incr: function () {
+                    this.counter++;
+                },
+                decr: function () {
+                    this.counter--;
+                },
+                changecolor: function () {
+                    this.isactive = !this.isactive;
+                },
+                getClass: function () {
+                    return { active: this.isactive, line: this.isline };
+                },
+
+                getindex: function (idx) {
+                    console.log(idx);
+                    for (let i = 0; i < this.fruits.length; i++) {
+                        if (idx == i)
+                            this.fruits[i].isshow = true;
+                        else
+                            this.fruits[i].isshow = false;
+                    }
+
+                },
+                changecolorli: function (m) {//这种更符合面向对象的写法mvvm
+                    for (mod of this.fruits) {
+                        if (mod.name == m.name)
+                            mod.isshow = true;
+                        else
+                            mod.isshow = false;
+                    }
+                },
+                getfullname: function () {
+                    return this.firstname + ' ' + this.lastname;
+                },
+                handleEvent(a, event) {
+                    console.log(a, event);
+                },
+                handleEventOne(a) {
+                    console.log(a);
+                },
+                handleEventTwo(event) {
+                    console.log(event);
+                },
+                divclick() { console.log("divclick"); },
+                btnclick() { console.log("btnclick"); },
+                submitFun() { console.log("submitFun"); },
+                keyup() { console.log("keyup"); },
+                btnclickone() {
+                    //Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会触发视图更新。这些被包裹过的方法包括：
+
+                    //push()数组中加入一个元素
+                    // this.movies.push("W");
+                    //pop()删除数组中最后一个元素
+                    //this.movies.pop();
+                    //shift()删除数组中第一个元素
+                    //this.movies.shift();
+                    //unshift()在数组最前面添加元素
+                    //this.movies.unshift("V","X");
+
+                    //splice()
+                    //删除元素 / 插入元素 / 替换元素
+                    //删除 从第二个参数传入你要删除的几个元素个数
+                    //替换 从第二个参数传入你要删除的几个元素个数
+                    //插入 从第二个参数传入0
+                    //splice(start) //删除
+                    //splice(1,2)//删除
+                    //this.movies.splice(1, 2, 'j', 'k');//替换
+                    // this.movies.splice(1, 0, "M", "N");//插入
+                    //sort()排序
+                    //reverse()反转
+                    // this.movies.reverse();
+                    //注意：通过索引值修改数组中的元素不会让视图响应更新，如果需要修改，则用splice替换掉
+                    //this.movies[0] = "abvddd";
+                    //this.movies.splice(0, 1, "abvddd");//替换
+                    //set(要修改对象，索引值，修改后的值)
+                    Vue.set(this.movies, 0, "abvddd");
+                },
+                clickindex(index) {
+                    this.indexcurrent = index;
+                },
+                valuechange(event) {
+                    this.message = event.target.value;
+                }
+            },
+            computed: {
+                //计算属性 简写  fullname是属性，不是方法，所以view写的话不需要像调用方法一样加()
+                fullname: function () {
+                    return this.firstname + ' ' + this.lastname;
+                }
+                //fullname: {
+                //    get: function () {
+                //       return this.firstname + ' ' + this.lastname;
+                //    },
+                //    set: function () { } //一般没有set 方法，就是只读属性
+                //}
+            }
+        });
+
+    </script>
+
+
+
+    <script>
+        //es6 let   块级作用域  es5之前 var if for没有块级作用域的
+        const btns = document.getElementsByTagName("button");
+        //for (var i = 0; i < btns.length; i++) {
+        //    btns[i].addEventListener('click', function () {
+        //        console.log('第'+i+'个按钮点击');
+        //    });
+        //}
+        //闭包解决块级作用域 函数有作用域
+        //for (var i = 0; i < btns.length; i++) {
+        //    (function (i) {
+        //        btns[i].addEventListener('click', function () {
+        //            console.log('第' + i + '个按钮点击');
+        //        });
+        //    })(i);
+
+        //}
+        // for (let i = 0; i < btns.length; i++) {
+        //    btns[i].addEventListener('click', function () {
+        //        console.log('第'+i+'个按钮点击');
+        //    });
+        //}
+
+
+        //es6 const
+        //1、一旦给const修饰的标识符赋值，不能修改
+        const name = "大壮";
+        // name = "niu"; //是错误的，不会改变x
+        console.log(name);
+        //2、使用const修饰符，必须赋值
+        //3、常量的含义是指向的对象不能修改，但可以修改对象内部的属性
+
+        const obj = {
+            name: "niu",
+            age: 10
+        };
+        obj.name = "niu2";
+        obj.age = 19;
+        console.log(obj.name, obj.age);
+
+        //对象的字面量增强写法
+        //es5写法
+        const objone = {
+            name: "niu",
+            age: 10
+        }
+        //es6写法
+        const nameone = "niu6";
+        const ageone = 12;
+        const objtwo = {
+            nameone,
+            ageone
+        }
+        //函数的增强写法
+        //es6
+        const objthree = {
+            get() {
+                console.log("es6函数写法");
+            },
+            post() {
+
+            }
+        }
+        objthree.get();
+
+        //高阶函数 filter/map/reduce
+
+        let nums = [10, 2., 111, 222, 40, 50];
+        //let totals = nums.filter(function (n) {
+        //    return n < 100;
+        //}).map(function (n) {
+        //    return n * 2;
+        //}).reduce(function (pre, n) {
+        //    return pre + n;
+        //});
+        let totals = nums.filter(n => n < 100).map(n => n * 2).reduce((pre, n) => pre + n, 0);
+        console.log(totals);
+
+
+    </script>
+</body>
+</html>

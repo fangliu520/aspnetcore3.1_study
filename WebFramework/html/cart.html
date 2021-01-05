@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../css/tablestyle.css" rel="stylesheet" />
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="books.length">
+
+
+            <table>
+                <thead>
+                <th></th>
+                <th>书籍名称</th>
+                <th>出版日期</th>
+                <th>价格</th>
+                <th>购买数量</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in books">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.price|showPrice}}</td>
+                        <td>
+                            <!--按照对象的操作-->
+                            <!--<button @click="incr(item)" v-bind:disabled="item.count<=1">-</button>
+                        {{item.count}}
+                        <button @click="decr(item)">+</button>-->
+                            <!--按照索引下标的操作-->
+                            <button @click="decrindex(index)" v-bind:disabled="item.count<=1">-</button>
+                            {{item.count}}
+                            <button @click="incrindex(index)">+</button>
+                        </td>
+                        <td><button @click="removeBook(index)">移除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>总价格：{{totalPrice|showPrice}}</h2>
+        </div>
+        <div v-else>购物车为空</div>
+    </div>
+    
+</body>
+</html>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            books: [
+                {
+                    id: 1,
+                    name: "《算法导论》",
+                    date: "2020-1-2",
+                    price: 120,
+                    count: 1
+                },
+                {
+                    id: 2,
+                    name: "《编程规范》",
+                    date: "2020-1-21",
+                    price: 150,
+                    count: 1
+                },
+                {
+                    id: 3,
+                    name: "《数学》",
+                    date: "2020-11-2",
+                    price: 100,
+                    count: 1
+                },
+                {
+                    id: 4,
+                    name: "《NET入门到精通》",
+                    date: "2018-1-2",
+                    price: 80,
+                    count: 1
+                },
+            ]
+
+        },
+        methods: {
+            decr(item) {
+                if (item.count > 1)
+                    item.count--;
+            },
+            incr(item) {
+                item.count++;
+            },
+            decrindex(index) {
+                if (this.books[index].count > 1)
+                    this.books[index].count--;
+            },
+            incrindex(index) {
+                this.books[index].count++;
+            },
+            removeBook(index) {
+                this.books.splice(index, 1);
+            }
+        },
+        filters: {
+            showPrice(price) {
+                return '￥' + price.toFixed(2);
+            }
+        },
+        computed: {
+            totalPrice() {
+                //let tprice = 0;
+                //for (let obj of this.books) {
+                //    tprice += obj.price * obj.count;
+                //}
+                //return tprice;
+                //return this.books.reduce(function (prevalue, book) {
+                //    return prevalue + book.price * book.count;
+                //}, 0);
+                return this.books.reduce((pre, book) => pre + book.price * book.count,0);
+            }
+        }
+    });
+</script>
