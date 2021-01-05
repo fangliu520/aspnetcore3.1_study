@@ -1,6 +1,25 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    .active { color: red; }
+    .handlep { cursor: pointer; }
+</style>
+<script>
+    $(function () {
+        $.ajax({
+            type: "Get",
+            data: [],
+            url: "http://localhost:5126/api/products",
+            success: function (res) {
+                $("#result").text(res);
+
+            }
+        });
+    });
+
+</script>
+<script src="~/js/vue.js"></script>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -27,17 +46,186 @@
 
 </div>
 
-<script>
-    $(function () {
-        $.ajax({
-            type: "Get",
-            data: [],
-            url: "http://localhost:5126/api/products",
-            success: function (res) {
-                $("#result").text(res);
 
+<div id="app">
+    <div v-cloak>
+        @*v-cloak 指令作用在 vue解析前 有一个v-cloak属性，并且 {{message}}不显示，解析后 v-cloak属性消失，{{message}}被替换成实际值*@
+        {{message}}：{{counter}}
+    </div>
+    @*<button v-on:click="incr">+</button>
+    <button v-on:click="decr">_</button1>*@
+    <br />
+    @*<button @click="incr">+</button>
+        <button @click="decr">_</button>*@
+
+    <div>
+        <ul>
+            <li v-for="(m,index) in movies">{{index}}-{{m}}</li>
+        </ul>
+
+        <ul>
+            <li v-for="(m,index) in fruits" v-on:click="getindex(index)" v-bind:class="{active:m.isshow}">{{index}}-{{m.name}}</li>
+        </ul>
+
+        <ul>
+            <li v-for="m in fruits" v-on:click="changecolorli(m)" v-bind:class="{active:m.isshow}">{{m.name}}--{{m.isshow}}</li>
+        </ul>
+    </div>
+    <div v-once> {{once}}</div>
+    <h3 v-html="urlhtml"></h3>
+    <div v-text="message"></div>
+    <div v-pre> {{message}}</div>
+    <a v-bind:href="url">百度v-bind</a>
+    <a :href="url">百度v-bind</a>
+    <!--动态绑定对象语法-->
+    <div v-bind:class="{active:isactive,line:isline}" v-on:click="changecolor" class="handlep">{{message}}</div>
+
+    <!--动态绑定对象语法 友好写法-->
+    <div v-bind:class="getClass()" v-on:click="changecolor" class="handlep">{{message}}</div>
+
+    <div>{{fullname}}</div>@*//计算属性*@
+
+    <div>{{getfullname()}}</div> @*调用方法*@
+
+</div>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '计数器!',
+            movies: ['A', 'B', 'C', 'D'],
+            counter: 0,
+            once: "加载一次 ",
+            urlhtml: "<a href='http://www.baidu.com'>百度</a>",
+            url: "http://www.baidu.com",
+            isactive: true,
+            isline: true,
+            fruits: [{ name: "苹果", isshow: false }, { name: "梨子", isshow: false }, { name: "香蕉", isshow: false }],
+            firstname: "liu",
+            lastname:"fang"
+
+
+        },
+        methods: {
+            incr: function () {
+                this.counter++;
+            },
+            decr: function () {
+                this.counter--;
+            },
+            changecolor: function () {
+                this.isactive = !this.isactive;
+            },
+            getClass: function () {
+                return { active: this.isactive, line: this.isline };
+            },
+
+            getindex: function (idx) {
+                console.log(idx);
+                for (let i = 0; i < this.fruits.length; i++) {
+                    if (idx == i)
+                        this.fruits[i].isshow = true;
+                    else
+                        this.fruits[i].isshow = false;
+                }
+
+            },
+            changecolorli: function (m) {//这种更符合面向对象的写法mvvm
+                for (mod of this.fruits) {
+                    if (mod.name == m.name)
+                        mod.isshow = true;
+                    else
+                        mod.isshow = false;
+                }
+            },
+            getfullname: function () {
+                return this.firstname + ' ' + this.lastname;
             }
-        });
+        },
+        computed: {
+            //计算属性 简写  fullname是属性，不是方法，所以view写的话不需要像调用方法一样加()
+            fullname: function () {
+                return this.firstname + ' ' + this.lastname;
+            }
+            //fullname: {
+            //    get: function () {
+            //       return this.firstname + ' ' + this.lastname;
+            //    },
+            //    set: function () { } //一般没有set 方法，就是只读属性
+            //}
+        }
     });
 
+</script>
+
+
+<div>
+    <button> 按钮0</button>
+    <button> 按钮1</button>
+    <button> 按钮2</button>
+    <button> 按钮3</button>
+</div>
+<script>
+    //es6 let   块级作用域  es5之前 var if for没有块级作用域的
+    const btns = document.getElementsByTagName("button");
+    //for (var i = 0; i < btns.length; i++) {
+    //    btns[i].addEventListener('click', function () {
+    //        console.log('第'+i+'个按钮点击');
+    //    });
+    //}
+    //闭包解决块级作用域 函数有作用域
+    for (var i = 0; i < btns.length; i++) {
+        (function (i) {btns[i].addEventListener('click', function () {
+            console.log('第'+i+'个按钮点击');
+        }); })(i);
+         
+    }
+    // for (let i = 0; i < btns.length; i++) {
+    //    btns[i].addEventListener('click', function () {
+    //        console.log('第'+i+'个按钮点击');
+    //    });
+    //}
+
+
+    //es6 const 
+    //1、一旦给const修饰的标识符赋值，不能修改
+     const name = "大壮";
+   // name = "niu"; //是错误的，不会改变x
+    console.log(name);
+    //2、使用const修饰符，必须赋值
+    //3、常量的含义是指向的对象不能修改，但可以修改对象内部的属性
+
+    const obj = {
+        name: "niu",
+        age: 10
+    };
+    obj.name = "niu2";
+    obj.age = 19;
+    console.log(obj.name, obj.age);
+
+    //对象的字面量增强写法
+    //es5写法
+    const objone = {
+         name: "niu",
+        age: 10
+    }
+    //es6写法
+    const nameone = "niu6";
+    const ageone = 12;
+    const objtwo = {
+        nameone,
+        ageone
+    }
+    //函数的增强写法
+    //es6
+    const objthree = {
+        get() {
+            console.log("es6函数写法");
+        },
+        post() {
+
+        }
+    }
+    objthree.get();
 </script>

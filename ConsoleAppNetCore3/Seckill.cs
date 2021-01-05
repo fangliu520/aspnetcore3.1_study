@@ -42,36 +42,9 @@ namespace ConsoleAppNetCore3
             Console.WriteLine($"在{minute}分0秒进行秒杀开始！");
 
             #region 秒杀Temple1
-            //var flag = true;
-            //while (flag)
-            //{
-            //    if (DateTime.Now.Minute == minute)
-            //    {
-            //        flag = false;
-            //        for (int i = 0; i < 100; i++)
-            //        {
-            //            string name = $"客户端ID{id}号：{i}";
-            //            Task.Run(() =>
-            //            {           
-
-            //                long num = rc.Decr("number");//减库存1 rc.Incr("number");//加一
-            //                if (num < 0)
-            //                {
-            //                    Console.WriteLine($"{name}抢购失败！");
-            //                }
-            //                else
-            //                {
-            //                    Console.WriteLine($"{name}*************抢购成功！***********");
-            //                }
-
-            //            });
-            //            Thread.Sleep(10);
-            //        }
-            //    } 
-            #endregion
-
-            #region 秒杀 temple2   
             var flag = true;
+            string key = "skey";
+           TimeSpan timeout= TimeSpan.FromSeconds(100);
             while (flag)
             {
                 if (DateTime.Now.Minute == minute)
@@ -80,33 +53,66 @@ namespace ConsoleAppNetCore3
                     for (int i = 0; i < 100; i++)
                     {
                         string name = $"客户端ID{id}号：{i}";
-                        Add(name);
-                        //Task.Factory.StartNew(()=> {
-                        //    OrderInfo mod = new OrderInfo()
-                        //    {
-                        //        Name = name,
-                        //        OrderTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
-                        //    };
-                        //    Console.WriteLine($"{name}下单成功！");
-                        //    string listKey = "orderlist";
-                        //    rc.AddItemToList(listKey, JsonConvert.SerializeObject(mod));
-                        //});
-                        //Task.Run(() =>
-                        //{
-                        //    OrderInfo mod = new OrderInfo()
-                        //    {
-                        //        Name = name,
-                        //        OrderTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
-                        //    };
-                        //    Console.WriteLine($"{name}下单成功！");
-                        //    string listKey = "orderlist";
-                        //    rc.AddItemToList(listKey, JsonConvert.SerializeObject(mod));
+                        Task.Run(() =>
+                        {
+                            //获取锁 timeout 不是过期时间
+                            using (var dataLock = rc.AcquireLock("DataLock:" + key, timeout))
+                            {
+                                long num = rc.Decr("number");//减库存1 rc.Incr("number");//加一
+                                if (num < 0)
+                                {
+                                    Console.WriteLine($"{name}抢购失败！");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{name}*************抢购成功！***********");
+                                }
+                                rc.Remove("DataLock:" + key);//释放锁
+                            }
 
-
-                        //});
-                        // Thread.Sleep(10);
+                        });
+                        Thread.Sleep(10);
                     }
                 }
+                #endregion
+
+                #region 秒杀 temple2   
+                //var flag = true;
+                //while (flag)
+                //{
+                //    if (DateTime.Now.Minute == minute)
+                //    {
+                //        flag = false;
+                //        for (int i = 0; i < 100; i++)
+                //        {
+                //            string name = $"客户端ID{id}号：{i}";
+                //            Add(name);
+                //            //Task.Factory.StartNew(()=> {
+                //            //    OrderInfo mod = new OrderInfo()
+                //            //    {
+                //            //        Name = name,
+                //            //        OrderTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
+                //            //    };
+                //            //    Console.WriteLine($"{name}下单成功！");
+                //            //    string listKey = "orderlist";
+                //            //    rc.AddItemToList(listKey, JsonConvert.SerializeObject(mod));
+                //            //});
+                //            //Task.Run(() =>
+                //            //{
+                //            //    OrderInfo mod = new OrderInfo()
+                //            //    {
+                //            //        Name = name,
+                //            //        OrderTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
+                //            //    };
+                //            //    Console.WriteLine($"{name}下单成功！");
+                //            //    string listKey = "orderlist";
+                //            //    rc.AddItemToList(listKey, JsonConvert.SerializeObject(mod));
+
+
+                //            //});
+                //            // Thread.Sleep(10);
+                //        }
+                //    }
                 #endregion
 
             }

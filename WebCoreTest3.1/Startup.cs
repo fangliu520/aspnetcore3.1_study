@@ -46,7 +46,7 @@ namespace WebCoreTest3._1
             {
                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
             });
-
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();//修改视图后，刷新浏览器看到变化
 
 
             ///全局注册异常Filter

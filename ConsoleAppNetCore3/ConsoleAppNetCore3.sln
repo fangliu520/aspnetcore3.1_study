@@ -37,7 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Elasticsear
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppDocker", "..\WebAppDocker\WebAppDocker.csproj", "{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreIOC", "..\WebCoreIOC\WebCoreIOC.csproj", "{5775603A-1320-4674-B88B-B5B1DD2C2A9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreIOC", "..\WebCoreIOC\WebCoreIOC.csproj", "{5775603A-1320-4674-B88B-B5B1DD2C2A9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppGrammar", "..\ConsoleAppGrammar\ConsoleAppGrammar.csproj", "{266398DE-BB67-4CC2-8E82-42FD9920EF01}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebVue", "..\WebVue\WebVue.csproj", "{1864ABDE-0069-420D-A565-20D3A19B3711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +121,14 @@ Global
 		{5775603A-1320-4674-B88B-B5B1DD2C2A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5775603A-1320-4674-B88B-B5B1DD2C2A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5775603A-1320-4674-B88B-B5B1DD2C2A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266398DE-BB67-4CC2-8E82-42FD9920EF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266398DE-BB67-4CC2-8E82-42FD9920EF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266398DE-BB67-4CC2-8E82-42FD9920EF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266398DE-BB67-4CC2-8E82-42FD9920EF01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1864ABDE-0069-420D-A565-20D3A19B3711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1864ABDE-0069-420D-A565-20D3A19B3711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1864ABDE-0069-420D-A565-20D3A19B3711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1864ABDE-0069-420D-A565-20D3A19B3711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
