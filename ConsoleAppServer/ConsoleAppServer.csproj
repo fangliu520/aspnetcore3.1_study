@@ -7,7 +7,21 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ServiceStack.Redis" Version="5.9.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Text.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

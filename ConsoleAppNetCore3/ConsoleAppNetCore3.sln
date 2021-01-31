@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppGrammar", "..\Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebVue", "..\WebVue\WebVue.csproj", "{1864ABDE-0069-420D-A565-20D3A19B3711}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppNetCore.DispatchQuartz", "..\AppNetCore.DispatchQuartz\AppNetCore.DispatchQuartz.csproj", "{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{1864ABDE-0069-420D-A565-20D3A19B3711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1864ABDE-0069-420D-A565-20D3A19B3711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1864ABDE-0069-420D-A565-20D3A19B3711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

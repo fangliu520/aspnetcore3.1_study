@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>MJD.NetCore.Utility</PackageId>
+    <Authors>maojindao</Authors>
+    <Product>MJD.NetCore.Utility</Product>
+    <Description>MJD.NetCore.Utility 提供常用的类库</Description>
+    <Copyright>maojindao</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,8 +17,22 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.9" />
-    <PackageReference Include="ServiceStack.Redis" Version="5.9.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>Redis\dll\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>Redis\dll\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>Redis\dll\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>Redis\dll\ServiceStack.Text.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

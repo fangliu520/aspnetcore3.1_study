@@ -30,14 +30,17 @@ namespace ConsoleAppNetCore3
         //private static ConnectionMultiplexer rc = ConnectionMultiplexer.Connect("127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,password=123456");
         static void Main(string[] args)
         {
-
-            var conn_w = ConfigurationManager.GetNode("ConnectionString:WriteConnection");
-            var conn_read=  ConfigurationManager.GetNode("ConnectionString:ReadConnectionList:0");
-            string s = conn_read;
-           // RedisClientHelper.MainHelper();
-           //
-           //string cityLimit = "{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}";
-           //string str = "[{\"id\":1,\"cities\":[\"上海\",\"成都\",\"苏州\",\"杭州\",\"长沙\",\"宁波\",\"无锡\",\"南京\",\"北京\",\"天津\",\"重庆\",\"台州\"],\"warnLabel\":\"（满39元免配送费）\",\"minAmount\":39,\"shipCost\":10,\"status\":true,\"allowCoupon\":false,\"allowActivityProducts\":true,\"allowDaijinCard\":true,\"allowNorDaijinCard\":true,\"allowEmpDaijinCard\":true,\"allowBigGiftBag\":true,\"allowExchangeVouchers\":true,\"cityLimit\":{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}}]";
+            //{
+            //    AppNetCore.DispatchQuartz.Quartz.Init();
+            //}
+            new TestRedisCrack();
+            //var conn_w = ConfigurationManager.GetNode("ConnectionString:WriteConnection");
+            //var conn_read=  ConfigurationManager.GetNode("ConnectionString:ReadConnectionList:0");
+            //string s = conn_read;
+            // RedisClientHelper.MainHelper();
+            //
+            //string cityLimit = "{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}";
+            //string str = "[{\"id\":1,\"cities\":[\"上海\",\"成都\",\"苏州\",\"杭州\",\"长沙\",\"宁波\",\"无锡\",\"南京\",\"北京\",\"天津\",\"重庆\",\"台州\"],\"warnLabel\":\"（满39元免配送费）\",\"minAmount\":39,\"shipCost\":10,\"status\":true,\"allowCoupon\":false,\"allowActivityProducts\":true,\"allowDaijinCard\":true,\"allowNorDaijinCard\":true,\"allowEmpDaijinCard\":true,\"allowBigGiftBag\":true,\"allowExchangeVouchers\":true,\"cityLimit\":{\"南京\":{shipCost:20},\"苏州\":{shipCost:20}}}]";
 
             //var item2 = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(str);
             //var l = item2[0]["cityLimit"];
@@ -45,10 +48,6 @@ namespace ConsoleAppNetCore3
 
             //var city = item["南京"];
             //var ship = city["shipCost"];
-
-
-
-
             //{
             //    new ReflectionCeshi().Test();
             //}
@@ -98,6 +97,11 @@ namespace ConsoleAppNetCore3
             //    string iResult = task.Result;
             //    Console.WriteLine(iResult);
             //} 
+            #endregion
+
+            #region redis测试
+
+
             #endregion
             //DateTime dt = Convert.ToDateTime("2020-09-29 13:53:31");
             //int num = dt.CompareTo(DateTime.Now);
@@ -277,7 +281,7 @@ namespace ConsoleAppNetCore3
             //Console.WriteLine(rc.GetAllItemsFromSortedSet(zset_key)); 
             #endregion
 
-            //#region list集合 redis常用list
+            #region list集合 redis常用list
             //Console.WriteLine("Hello World!");
             //string listkey = "redis_listlog";
             //while (1 == 1)
@@ -307,7 +311,7 @@ namespace ConsoleAppNetCore3
 
             //foreach (string str in infos)
             //    Console.WriteLine(str); 
-            //#endregion
+            #endregion
 
             #region redis集合并集
             //rc.AddRangeToSet("keyone", new List<string>() { "001", "002", "003" });
@@ -320,6 +324,7 @@ namespace ConsoleAppNetCore3
             //    Console.WriteLine(s);
             //}
             #endregion
+
             //string jwt = new JWTHelper().Encode("");
             //Console.WriteLine(jwt);
 
@@ -374,8 +379,35 @@ namespace ConsoleAppNetCore3
             public string name { get; set; }
             public int score { get; set; }
         }
+        public class TestRedisCrack
+        {
+            #region TestRedisCrack
+            static TestRedisCrack()
+            {
+                try
+                {
+                    Parallel.For(0, 10000, (i) =>
+                    {
+                        using (RedisClient client = new RedisClient(SERVER,PORT,PWD))
+                        {
+                            client.Set("name" + i, i);
+                            client.Incr("name" + i);
+                            Console.WriteLine(i);
+                        }
 
+                    });
+                    Console.WriteLine("ok");
+                    Console.WriteLine("Hello World!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            #endregion
+        }
     }
+    #region JWT 测试
 
     public class Student
     {
@@ -383,7 +415,10 @@ namespace ConsoleAppNetCore3
     }
 
 
-    //头信息Header、有效载荷Payload、签名sign_key，中间以（.）分隔
+
+    /// <summary>
+    ///  //头信息Header、有效载荷Payload、签名sign_key，中间以（.）分隔
+    /// </summary>
     public class JWTHelper
     {
         private const string SIGNKEY = "mjd";
@@ -442,5 +477,13 @@ namespace ConsoleAppNetCore3
             }
             return "";
         }
+
+
+
     }
+    #endregion
+
+ 
+
+
 }

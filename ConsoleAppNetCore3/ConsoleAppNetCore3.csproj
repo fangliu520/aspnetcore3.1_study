@@ -5,6 +5,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 	  <LangVersion>8.0</LangVersion>
 	    <NullableReferenceTypes>true</NullableReferenceTypes>
+	    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	    <PackageId>MJD.NetCore.Utitlity</PackageId>
+	    <Authors>maojindao</Authors>
+	    <Company>maojindao</Company>
+	    <Product>Utitlity</Product>
+	    <Description>常用类库</Description>
+	    <Copyright>maojindao</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,12 +29,27 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.9" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ServiceStack.Redis" Version="5.9.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AppNetCore.DispatchQuartz\AppNetCore.DispatchQuartz.csproj" />
     <ProjectReference Include="..\AppNetCore.Utility\AppNetCore.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\AppNetCore.Utility\Redis\dll\ServiceStack.Text.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
