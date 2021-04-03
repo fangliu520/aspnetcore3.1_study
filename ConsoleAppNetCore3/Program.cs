@@ -30,10 +30,16 @@ namespace ConsoleAppNetCore3
         //private static ConnectionMultiplexer rc = ConnectionMultiplexer.Connect("127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,password=123456");
         static void Main(string[] args)
         {
+            string encode = "yoLWunzLFCs8iHXN37Yd4VmPd0Rc31SpSaCgW/gI1phpEccnP4bXFF+IHzJUwk/xaFl1xHmfA+IrnCFZ2/1cCg==";
+            AppNetCore.Utility.AESHelper aes = new AppNetCore.Utility.AESHelper();
+
+            string decode = aes.Decrypt(encode);
+          Console.WriteLine(  decode);
+
             //{
             //    AppNetCore.DispatchQuartz.Quartz.Init();
             //}
-            new TestRedisCrack();
+            // new TestRedisCrack();
             //var conn_w = ConfigurationManager.GetNode("ConnectionString:WriteConnection");
             //var conn_read=  ConfigurationManager.GetNode("ConnectionString:ReadConnectionList:0");
             //string s = conn_read;
@@ -435,7 +441,7 @@ namespace ConsoleAppNetCore3
             byte[] arr = md5.ComputeHash(System.Text.Encoding.ASCII.GetBytes(value));
             foreach (byte b in arr)
             {
-                sb.AppendFormat("{0:x}", b);
+                sb.AppendFormat(b.ToString("X2"));
             }
             return sb.ToString();
         }

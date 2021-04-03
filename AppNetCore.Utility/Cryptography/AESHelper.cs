@@ -16,7 +16,7 @@ namespace AppNetCore.Utility
         /// <summary>
         /// 密钥
         /// </summary>
-        private string m_CstrKey = "6687D317BFb6E2d29fdZaiB7NQM86666";                                    
+        private string m_CstrKey = "6b87D317BFb6E2d29fdZaiB7NQM8JXFL";                                    
 
         /// <summary>
         /// 编码方式
