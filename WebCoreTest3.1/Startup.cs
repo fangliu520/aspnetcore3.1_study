@@ -1,25 +1,21 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using System.Threading.Tasks;
 using AppNetCore.Interface.Extend;
 using AppNetCore.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebCoreTest3._1.Utility;
-using log4net;
 using AppNetCore.Service.Utility;
 using AppNetCore.Utility;
 using AppNetCore.Utility.Redis;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace WebCoreTest3._1
 {
@@ -77,6 +73,11 @@ namespace WebCoreTest3._1
             loggerFactory.AddLog4Net("log4net.config");
             app.UseMiddleware<RefuseStealChainMiddleWare>();//防盗链中间件
             app.UseStaticFiles();
+            //执行静态文件 把wwwroot文件夹拷贝到bin目录下
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot"))//执行文件下的wwwroot 文件夹
+            //}); 
 
             app.UseRouting();
 
