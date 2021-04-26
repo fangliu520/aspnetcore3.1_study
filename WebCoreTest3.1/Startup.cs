@@ -31,6 +31,11 @@ namespace WebCoreTest3._1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region 解决修改视图内容，必须编译后方可生效的问题
+            //1.Nuget安装：Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+            //2.配置使用services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            #endregion
             services.Configure<DBConnectionOption>(Configuration.GetSection("ConnectionString"));
             services.Configure<RedisConnectionOption>(Configuration.GetSection("RedisConnectionString"));
             services.AddTransient<IRedisHelper, RedisHelper>();
@@ -43,7 +48,7 @@ namespace WebCoreTest3._1
             {
                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
             });
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();//修改视图后，刷新浏览器看到变化
+            
 
 
             ///全局注册异常Filter
