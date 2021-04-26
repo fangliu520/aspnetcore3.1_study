@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>WebCoreTest3._1</RootNamespace>
   </PropertyGroup>
 
@@ -17,6 +17,12 @@
     <ProjectReference Include="..\AppNetCore.Interface\AppNetCore.Interface.csproj" />
     <ProjectReference Include="..\AppNetCore.Service\AppNetCore.Service.csproj" />
     <ProjectReference Include="..\AppNetCore.Utility\AppNetCore.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

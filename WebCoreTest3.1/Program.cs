@@ -17,13 +17,16 @@ namespace WebCoreTest3._1
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)          
-           .ConfigureLogging((context, loggingBuilder) =>
-           {
-               loggingBuilder.AddFilter("System", LogLevel.Warning);//过滤掉System
-               loggingBuilder.AddFilter("Microsoft", LogLevel.Warning);//过滤掉Microsoft            
-               loggingBuilder.AddLog4Net($"log4net.config");//配置文件
-           })
+            Host.CreateDefaultBuilder(args)
+
+        #region 日志组件引用方法一
+                //.ConfigureLogging((context, loggingBuilder) =>
+                //{
+                //    loggingBuilder.AddFilter("System", LogLevel.Warning);//过滤掉System
+                //    loggingBuilder.AddFilter("Microsoft", LogLevel.Warning);//过滤掉Microsoft            
+                //    loggingBuilder.AddLog4Net($"log4net.config");//配置文件
+                //}) 
+        #endregion
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

@@ -19,6 +19,7 @@ using log4net;
 using AppNetCore.Service.Utility;
 using AppNetCore.Utility;
 using AppNetCore.Utility.Redis;
+using Microsoft.Extensions.Logging;
 
 namespace WebCoreTest3._1
 {
@@ -57,7 +58,13 @@ namespace WebCoreTest3._1
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="loggerFactory">log4net第二种方法</param>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILoggerFactory  loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +74,7 @@ namespace WebCoreTest3._1
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            loggerFactory.AddLog4Net("log4net.config");
             app.UseMiddleware<RefuseStealChainMiddleWare>();//防盗链中间件
             app.UseStaticFiles();
 
