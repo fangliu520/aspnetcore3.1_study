@@ -1,5 +1,7 @@
 ﻿using ConsoleApp.RabbitMQ.MessageProducer.MessageProducer;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
 
 namespace ConsoleApp.RabbitMQ.MessageProducer
 {
@@ -12,7 +14,7 @@ namespace ConsoleApp.RabbitMQ.MessageProducer
                 #region 架构师VIP班-1 
                 {
                     ////生产者消费者
-                    ProductionConsumer.Show();
+                    //ProductionConsumer.Show();
                 }
                 {
                     /////多生产者多消费者
@@ -42,23 +44,23 @@ namespace ConsoleApp.RabbitMQ.MessageProducer
                 }
                 {
                     ////秒杀
-                    //IConfigurationRoot config = new ConfigurationBuilder()
-                    // .SetBasePath(Directory.GetCurrentDirectory())
-                    // .AddCommandLine(args)//支持命令行参数
-                    // .Build();
-                    //string strMinute = config["minute"];  //什么时候开始执行 
-                    //int minute = Convert.ToInt32(strMinute);
+                    IConfigurationRoot config = new ConfigurationBuilder()
+                     .SetBasePath(Directory.GetCurrentDirectory())
+                     .AddCommandLine(args)//支持命令行参数
+                     .Build();
+                    string strMinute = config["minute"];  //什么时候开始执行 
+                    int minute = Convert.ToInt32(strMinute);
 
-                    //bool flg = true;
-                    //while (flg)
-                    //{
-                    //    Console.WriteLine($"到{strMinute}分钟，开始写入消息。。。");
-                    //    if (DateTime.Now.Minute == minute)
-                    //    {
-                    //        flg = false;
-                    //        SeckillConsumer.Show();
-                    //    }
-                    //}
+                    bool flg = true;
+                    while (flg)
+                    {
+                        Console.WriteLine($"到{strMinute}分钟，开始写入消息。。。");
+                        if (DateTime.Now.Minute == minute)
+                        {
+                            flg = false;
+                            SeckillConsumer.Show();
+                        }
+                    }
                 }
                 {
                     ////优先级 

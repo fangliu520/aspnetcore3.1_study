@@ -47,7 +47,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.DispatchQuartz",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webnet5.apollo", "..\webnet5.apollo\webnet5.apollo.csproj", "{062371A2-F17D-4AD0-8B07-E05F89BFCA6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.RabbitMQ.MessageProducer", "..\ConsoleApp.RabbitMQ.MessageProducer\ConsoleApp.RabbitMQ.MessageProducer.csproj", "{8E0854FE-FED4-4203-A732-76B21501DCBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.RabbitMQ.MessageProducer", "..\ConsoleApp.RabbitMQ.MessageProducer\ConsoleApp.RabbitMQ.MessageProducer.csproj", "{8E0854FE-FED4-4203-A732-76B21501DCBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.RabbitMQ.MessageConsumer", "..\ConsoleApp.RabbitMQ.MessageConsumer\ConsoleApp.RabbitMQ.MessageConsumer.csproj", "{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,10 @@ Global
 		{8E0854FE-FED4-4203-A732-76B21501DCBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E0854FE-FED4-4203-A732-76B21501DCBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E0854FE-FED4-4203-A732-76B21501DCBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
