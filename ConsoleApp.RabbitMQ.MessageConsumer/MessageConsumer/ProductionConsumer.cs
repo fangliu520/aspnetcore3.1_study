@@ -23,6 +23,7 @@ namespace ConsoleApp.RabbitMQ.MessageConsumer.MessageConsumer
                     try
                     {
 
+                        #region 消费端声明队列，为了防止生产端没有开启报错，
                         channel.QueueDeclare(queue: "OnlyProducerMessage", durable: true, exclusive: false, autoDelete: false, arguments: null);
 
 
@@ -30,6 +31,7 @@ namespace ConsoleApp.RabbitMQ.MessageConsumer.MessageConsumer
 
                         channel.QueueBind(queue: "OnlyProducerMessage", exchange: "OnlyProducerMessageExChange", routingKey: string.Empty, arguments: null);
 
+                        #endregion
 
                         var consumer = new EventingBasicConsumer(channel);
                         consumer.Received += (model, ea) =>

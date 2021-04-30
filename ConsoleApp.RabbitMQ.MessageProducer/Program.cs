@@ -1,7 +1,9 @@
-﻿using ConsoleApp.RabbitMQ.MessageProducer.MessageProducer;
+﻿using ConsoleApp.RabbitMQ.MessageProducer.Advance;
+using ConsoleApp.RabbitMQ.MessageProducer.MessageProducer;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace ConsoleApp.RabbitMQ.MessageProducer
 {
@@ -25,10 +27,10 @@ namespace ConsoleApp.RabbitMQ.MessageProducer
 
                     //string strMinute = config["minute"];  //什么时候开始执行
                     //string No = config["no"]; //生产者编号 
-                    //int minute = Convert.ToInt32(strMinute); 
+                    //int minute = Convert.ToInt32(strMinute);
                     //bool flg = true;
                     //while (flg)
-                    //{ 
+                    //{
                     //    if (DateTime.Now.Minute == minute)
                     //    {
                     //        Console.WriteLine($"到{strMinute}分钟，开始写入消息。。。");
@@ -44,27 +46,27 @@ namespace ConsoleApp.RabbitMQ.MessageProducer
                 }
                 {
                     ////秒杀
-                    IConfigurationRoot config = new ConfigurationBuilder()
-                     .SetBasePath(Directory.GetCurrentDirectory())
-                     .AddCommandLine(args)//支持命令行参数
-                     .Build();
-                    string strMinute = config["minute"];  //什么时候开始执行 
-                    int minute = Convert.ToInt32(strMinute);
+                    //IConfigurationRoot config = new ConfigurationBuilder()
+                    // .SetBasePath(Directory.GetCurrentDirectory())
+                    // .AddCommandLine(args)//支持命令行参数
+                    // .Build();
+                    //string strMinute = config["minute"];  //什么时候开始执行 
+                    //int minute = Convert.ToInt32(strMinute);
 
-                    bool flg = true;
-                    while (flg)
-                    {
-                        Console.WriteLine($"到{strMinute}分钟，开始写入消息。。。");
-                        if (DateTime.Now.Minute == minute)
-                        {
-                            flg = false;
-                            SeckillConsumer.Show();
-                        }
-                    }
+                    //bool flg = true;
+                    //while (flg)
+                    //{
+                    //    Console.WriteLine($"到{strMinute}分钟，开始写入消息。。。");
+                    //    if (DateTime.Now.Minute == minute)
+                    //    {
+                    //        flg = false;
+                    //        SeckillConsumer.Show();
+                    //    }
+                    //}
                 }
                 {
                     ////优先级 
-                    //PriorityQueue.Show(); 
+                    PriorityQueue.Show(); 
                 }
                 {
                     ////发布订阅模式

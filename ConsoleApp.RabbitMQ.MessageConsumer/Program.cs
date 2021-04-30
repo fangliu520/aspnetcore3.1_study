@@ -1,5 +1,7 @@
-﻿using ConsoleApp.RabbitMQ.MessageConsumer.MessageConsumer;
+﻿using ConsoleApp.RabbitMQ.MessageConsumer.Advance;
+using ConsoleApp.RabbitMQ.MessageConsumer.MessageConsumer;
 using System;
+using System.Threading.Tasks;
 
 namespace ConsoleApp.RabbitMQ.MessageConsumer
 {
@@ -28,7 +30,7 @@ namespace ConsoleApp.RabbitMQ.MessageConsumer
                 }
                 {
                     ////秒杀
-                      SeckillConsumer.Show();
+                     // SeckillConsumer.Show();
                 }
 
                 {
@@ -36,7 +38,7 @@ namespace ConsoleApp.RabbitMQ.MessageConsumer
                     //PublishSubscribeConsumer.Show();
                 }
                 {
-                    //PriorityQueue.Show();
+                    PriorityQueue.Show();
                 }
 
                 #endregion
