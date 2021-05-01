@@ -1,4 +1,5 @@
 ﻿using ConsoleApp.RabbitMQ.MessageConsumer.Advance;
+using ConsoleApp.RabbitMQ.MessageConsumer.ExchangeDemo;
 using ConsoleApp.RabbitMQ.MessageConsumer.MessageConsumer;
 using System;
 using System.Threading.Tasks;
@@ -38,20 +39,20 @@ namespace ConsoleApp.RabbitMQ.MessageConsumer
                     //PublishSubscribeConsumer.Show();
                 }
                 {
-                    PriorityQueue.Show();
+                    //PriorityQueue.Show();
                 }
 
                 #endregion
 
                 #region 架构师VIP班-2
                 {
-                    // DirectExchangeConsumerLogAll.Show();
+                     //DirectExchangeConsumerLogAll.Show();
                 }
                 {
-                    // FanoutExchange.Show();
+                     //FanoutExchange.Show();
                 }
                 {
-                    //TopicExchange.Show();
+                    TopicExchange.Show();
                 }
                 #endregion
 

@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.RabbitMQ.Message
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.RabbitMQ.MessageConsumer", "ConsoleApp.RabbitMQ.MessageConsumer\ConsoleApp.RabbitMQ.MessageConsumer.csproj", "{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.RabbitMQ.MessageConsumer_02", "ConsoleApp.RabbitMQ.MessageConsumer_02\ConsoleApp.RabbitMQ.MessageConsumer_02.csproj", "{2B9C1A72-B007-48BB-9C08-298129381497}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,10 @@ Global
 		{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B9C1A72-B007-48BB-9C08-298129381497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B9C1A72-B007-48BB-9C08-298129381497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B9C1A72-B007-48BB-9C08-298129381497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B9C1A72-B007-48BB-9C08-298129381497}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,7 +14,7 @@ namespace ConsoleApp.RabbitMQ.MessageProducer.MessageProducer
             factory.HostName = "localhost";//RabbitMQ服务在本地运行
             factory.UserName = "guest";//用户名
             factory.Password = "guest";//密码 
-                                       //factory.VirtualHost = "/mjd";
+            //factory.VirtualHost = "/mjd"; //默认是系统/
             using (IConnection connection = factory.CreateConnection())
             {
                 using (IModel channel = connection.CreateModel())

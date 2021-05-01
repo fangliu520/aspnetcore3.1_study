@@ -1,4 +1,5 @@
 ﻿using ConsoleApp.RabbitMQ.MessageProducer.Advance;
+using ConsoleApp.RabbitMQ.MessageProducer.ExchangeDemo;
 using ConsoleApp.RabbitMQ.MessageProducer.MessageProducer;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -65,8 +66,8 @@ namespace ConsoleApp.RabbitMQ.MessageProducer
                     //}
                 }
                 {
-                    ////优先级 
-                    PriorityQueue.Show(); 
+                    ////优先级 队列
+                   // PriorityQueue.Show(); 
                 }
                 {
                     ////发布订阅模式
@@ -77,16 +78,20 @@ namespace ConsoleApp.RabbitMQ.MessageProducer
 
                 #region 架构师VIP班-2
                 {
-                    //DirectExchange.Show();
+                    //写日志 错误日志发送邮件  
+                    // 需要分支去处理的时候就可以用DirectExchange
+                  //  DirectExchange.Show();
                 }
                 {
+                    //发布订阅模式 
                     //FanoutExchange.Show();
                 }
                 {
-                    //TopicExchange.Show();
+                    //打标签 实现关键词的过滤 分组
+                   // TopicExchange.Show();
                 }
                 {
-                    //HeaderExchange.Show();
+                    HeaderExchange.Show();
                 }
                 #endregion
 
