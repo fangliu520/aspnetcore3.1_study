@@ -3,53 +3,51 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppNetCore3", "ConsoleAppNetCore3.csproj", "{DB8C0876-D559-4418-ACF6-5A603DDD4B06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppNetCore3", "ConsoleAppNetCore3\ConsoleAppNetCore3.csproj", "{DB8C0876-D559-4418-ACF6-5A603DDD4B06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest3.1", "..\WebCoreTest3.1\WebCoreTest3.1.csproj", "{274DF774-AAE8-4F55-9FA1-6AB0D98A9125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest3.1", "WebCoreTest3.1\WebCoreTest3.1.csproj", "{274DF774-AAE8-4F55-9FA1-6AB0D98A9125}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Interface", "..\AppNetCore.Interface\AppNetCore.Interface.csproj", "{28160B44-4FBC-40D3-BED9-6E268F9507AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Interface", "AppNetCore.Interface\AppNetCore.Interface.csproj", "{28160B44-4FBC-40D3-BED9-6E268F9507AD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Service", "..\AppNetCore.Service\AppNetCore.Service.csproj", "{76241C0C-1C0B-49AC-97FD-C7FE2C038649}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Service", "AppNetCore.Service\AppNetCore.Service.csproj", "{76241C0C-1C0B-49AC-97FD-C7FE2C038649}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Model", "..\AppNetCore.Model\AppNetCore.Model.csproj", "{7543542F-3CA8-402C-A2F2-1CE1F55B2F1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Model", "AppNetCore.Model\AppNetCore.Model.csproj", "{7543542F-3CA8-402C-A2F2-1CE1F55B2F1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Project", "..\AppNetCore.Project\AppNetCore.Project.csproj", "{02DFA426-F639-4EBB-BC43-8BC2E8F1CAEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Project", "AppNetCore.Project\AppNetCore.Project.csproj", "{02DFA426-F639-4EBB-BC43-8BC2E8F1CAEE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCore", "..\WebApiCore\WebApiCore.csproj", "{5BA1FCE9-5588-4D54-9366-DF9B96B37DA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCore", "WebApiCore\WebApiCore.csproj", "{5BA1FCE9-5588-4D54-9366-DF9B96B37DA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCoreGateway", "..\WebApiCoreGateway\WebApiCoreGateway.csproj", "{1B8064AF-0418-43C8-84E1-2B458D5EB898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCoreGateway", "WebApiCoreGateway\WebApiCoreGateway.csproj", "{1B8064AF-0418-43C8-84E1-2B458D5EB898}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiAuthentication", "..\WebApiAuthentication\WebApiAuthentication.csproj", "{6AAD462A-A500-4F66-BE3B-AA63C57B859E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiAuthentication", "WebApiAuthentication\WebApiAuthentication.csproj", "{6AAD462A-A500-4F66-BE3B-AA63C57B859E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiProduct", "..\WebApiProduct\WebApiProduct.csproj", "{A44602EC-7531-40F0-82C8-6134FD355E84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiProduct", "WebApiProduct\WebApiProduct.csproj", "{A44602EC-7531-40F0-82C8-6134FD355E84}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Utility", "..\AppNetCore.Utility\AppNetCore.Utility.csproj", "{135135A8-DF79-4AF3-8916-B6B4194C9BF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.Utility", "AppNetCore.Utility\AppNetCore.Utility.csproj", "{135135A8-DF79-4AF3-8916-B6B4194C9BF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppServer", "..\ConsoleAppServer\ConsoleAppServer.csproj", "{FD474A55-8ABB-4A54-B7F6-099E94355741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppServer", "ConsoleAppServer\ConsoleAppServer.csproj", "{FD474A55-8ABB-4A54-B7F6-099E94355741}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_File", "..\WebCoreTest_ELK_Logstash_File\WebCoreTest_ELK_Logstash_File.csproj", "{A21849C0-9EE9-4913-9C2F-5B9B642A5E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_File", "WebCoreTest_ELK_Logstash_File\WebCoreTest_ELK_Logstash_File.csproj", "{A21849C0-9EE9-4913-9C2F-5B9B642A5E4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_TCP", "..\WebCoreTest_ELK_Logstash_TCP\WebCoreTest_ELK_Logstash_TCP.csproj", "{138C7DE6-29D6-456F-B163-40F194DC956D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_TCP", "WebCoreTest_ELK_Logstash_TCP\WebCoreTest_ELK_Logstash_TCP.csproj", "{138C7DE6-29D6-456F-B163-40F194DC956D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_Redis", "..\WebCoreTest_ELK_Logstash_Redis\WebCoreTest_ELK_Logstash_Redis.csproj", "{3499B22C-3747-4140-BC80-8CDEA335DFA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Logstash_Redis", "WebCoreTest_ELK_Logstash_Redis\WebCoreTest_ELK_Logstash_Redis.csproj", "{3499B22C-3747-4140-BC80-8CDEA335DFA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Elasticsearch", "..\WebCoreTest_ELK_Elasticsearch\WebCoreTest_ELK_Elasticsearch.csproj", "{DE5290F2-9505-42C6-9399-A1D503E2EA7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreTest_ELK_Elasticsearch", "WebCoreTest_ELK_Elasticsearch\WebCoreTest_ELK_Elasticsearch.csproj", "{DE5290F2-9505-42C6-9399-A1D503E2EA7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppDocker", "..\WebAppDocker\WebAppDocker.csproj", "{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppDocker", "WebAppDocker\WebAppDocker.csproj", "{B0295904-A13B-4221-B7D9-D63E8CA9C1D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreIOC", "..\WebCoreIOC\WebCoreIOC.csproj", "{5775603A-1320-4674-B88B-B5B1DD2C2A9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreIOC", "WebCoreIOC\WebCoreIOC.csproj", "{5775603A-1320-4674-B88B-B5B1DD2C2A9B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppGrammar", "..\ConsoleAppGrammar\ConsoleAppGrammar.csproj", "{266398DE-BB67-4CC2-8E82-42FD9920EF01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppGrammar", "ConsoleAppGrammar\ConsoleAppGrammar.csproj", "{266398DE-BB67-4CC2-8E82-42FD9920EF01}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebVue", "..\WebVue\WebVue.csproj", "{1864ABDE-0069-420D-A565-20D3A19B3711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.DispatchQuartz", "AppNetCore.DispatchQuartz\AppNetCore.DispatchQuartz.csproj", "{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppNetCore.DispatchQuartz", "..\AppNetCore.DispatchQuartz\AppNetCore.DispatchQuartz.csproj", "{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webnet5.apollo", "webnet5.apollo\webnet5.apollo.csproj", "{062371A2-F17D-4AD0-8B07-E05F89BFCA6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webnet5.apollo", "..\webnet5.apollo\webnet5.apollo.csproj", "{062371A2-F17D-4AD0-8B07-E05F89BFCA6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.RabbitMQ.MessageProducer", "ConsoleApp.RabbitMQ.MessageProducer\ConsoleApp.RabbitMQ.MessageProducer.csproj", "{8E0854FE-FED4-4203-A732-76B21501DCBA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.RabbitMQ.MessageProducer", "..\ConsoleApp.RabbitMQ.MessageProducer\ConsoleApp.RabbitMQ.MessageProducer.csproj", "{8E0854FE-FED4-4203-A732-76B21501DCBA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.RabbitMQ.MessageConsumer", "..\ConsoleApp.RabbitMQ.MessageConsumer\ConsoleApp.RabbitMQ.MessageConsumer.csproj", "{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.RabbitMQ.MessageConsumer", "ConsoleApp.RabbitMQ.MessageConsumer\ConsoleApp.RabbitMQ.MessageConsumer.csproj", "{E0D7F8E1-891F-44B0-AA6C-ECF764C491D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,10 +131,6 @@ Global
 		{266398DE-BB67-4CC2-8E82-42FD9920EF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{266398DE-BB67-4CC2-8E82-42FD9920EF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{266398DE-BB67-4CC2-8E82-42FD9920EF01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1864ABDE-0069-420D-A565-20D3A19B3711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1864ABDE-0069-420D-A565-20D3A19B3711}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1864ABDE-0069-420D-A565-20D3A19B3711}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1864ABDE-0069-420D-A565-20D3A19B3711}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C8B9916-0FD2-4345-99FA-D50DA4278FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
