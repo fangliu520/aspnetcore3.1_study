@@ -91,7 +91,12 @@ namespace ConsoleApp.RabbitMQ.MessageProducer
                    // TopicExchange.Show();
                 }
                 {
-                    HeaderExchange.Show();
+                    //HeaderExchange.Show();
+                }
+
+                {
+                    //延时队列 DeadLetter
+                    DeadLetterExchange.Show();
                 }
                 #endregion
 
