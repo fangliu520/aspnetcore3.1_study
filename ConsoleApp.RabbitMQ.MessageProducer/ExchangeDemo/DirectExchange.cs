@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using RabbitMQ.Client;
 namespace ConsoleApp.RabbitMQ.MessageProducer.ExchangeDemo
 {
+    /// <summary>
+    /// 直接交换机
+    /// </summary>
     public class DirectExchange
     {
         public static void Show()

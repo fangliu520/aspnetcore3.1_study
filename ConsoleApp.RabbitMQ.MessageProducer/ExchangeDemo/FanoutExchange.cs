@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.RabbitMQ.MessageProducer.ExchangeDemo
 {
+    /// <summary>
+    /// 广播式交换机
+    /// </summary>
     public class FanoutExchange
     {
         public static void Show()

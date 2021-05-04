@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.RabbitMQ.MessageProducer.ExchangeDemo
 {
+    /// <summary>
+    /// 消息体header匹配交换机
+    /// </summary>
     public class HeaderExchange
     {
         public static void Show()

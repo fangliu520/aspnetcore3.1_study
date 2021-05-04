@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.RabbitMQ.MessageProducer.ExchangeDemo
 {
+    /// <summary>
+    /// 主题交换机
+    /// </summary>
     public class TopicExchange
     {
         public static void Show()
