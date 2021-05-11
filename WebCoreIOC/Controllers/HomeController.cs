@@ -93,7 +93,7 @@ namespace WebCoreIOC.Controllers
 
             {
                 //IOC -AOP
-
+                container.Register<ITestServiceB, TestServiceB>();
                 container.Register<ITestServiceC, TestServiceC>();
 
                 ITestServiceC testServiceC = container.Resolve<ITestServiceC>();

@@ -26,6 +26,10 @@ namespace AppNetCore.Service.SqlHelper
 {
     public class TestServiceC : ITestServiceC
     {
+        private ITestServiceB _iTestServiceB;
+        public TestServiceC(ITestServiceB testServiceB) {
+            _iTestServiceB = testServiceB;
+        }
         public void show()
         {
             Console.WriteLine("我是TestServiceC");

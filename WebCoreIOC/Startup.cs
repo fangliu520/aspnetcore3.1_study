@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Autofac;
+using AppNetCore.Service.SqlHelper;
+
 namespace WebCoreIOC
 {
     public class Startup
@@ -25,7 +28,28 @@ namespace WebCoreIOC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            #region Autofac
 
+            #region autofac 获取服务
+            //ContainerBuilder containerBuilder = new ContainerBuilder();
+            //containerBuilder.RegisterType<TestServiceB>().As<ITestServiceB>();
+            //IContainer container = containerBuilder.Build();
+            //ITestServiceB serviceB=   container.Resolve<ITestServiceB>();//获取服务
+            //serviceB.show(); 
+            #endregion
+
+            #region 构造函数注入
+
+            ContainerBuilder containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterType<TestServiceB>().As<ITestServiceB>();
+            containerBuilder.RegisterType<TestServiceC>().As<ITestServiceC>();
+
+            IContainer container = containerBuilder.Build();
+            ITestServiceC serviceC = container.Resolve<ITestServiceC>();
+            serviceC.show();
+
+            #endregion
+            #endregion
 
             #region JWT鉴权授权
             var ValidAudience = Configuration["audience"];
@@ -34,7 +58,8 @@ namespace WebCoreIOC
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)//jwt  josn web token
             .AddJwtBearer(x =>
            {
-               x.TokenValidationParameters = new TokenValidationParameters {
+               x.TokenValidationParameters = new TokenValidationParameters
+               {
                    ValidateIssuer = true,
                    ValidateAudience = true,
                    ValidateLifetime = true,
@@ -43,7 +68,7 @@ namespace WebCoreIOC
                    ValidIssuer = ValidIssuer,
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecurityKey))
                };
-              
+
            });
             #endregion
         }
