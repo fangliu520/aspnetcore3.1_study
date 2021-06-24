@@ -55,9 +55,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppJVM", "ConsoleApp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kafka", "Kafka", "{D43E64C1-B48E-4B8D-864A-856E66934EBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaServer", "KafkaServer\KafkaServer.csproj", "{201B32B7-7A76-47EE-892F-D3FA624BA90A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaServer", "KafkaServer\KafkaServer.csproj", "{201B32B7-7A76-47EE-892F-D3FA624BA90A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClient", "KafkaClient\KafkaClient.csproj", "{117626A4-B4C4-4278-B969-F538C8613B35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaClient", "KafkaClient\KafkaClient.csproj", "{117626A4-B4C4-4278-B969-F538C8613B35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StructureAlgorithm", "StructureAlgorithm", "{E6E8B8C3-5FD6-4F20-ACD6-4A354E0A1831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJD.StructureAlgorithm.Project", "MJD.StructureAlgorithm.Project\MJD.StructureAlgorithm.Project.csproj", "{D12A9841-AF21-466F-B592-258FE58796E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,6 +177,10 @@ Global
 		{117626A4-B4C4-4278-B969-F538C8613B35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117626A4-B4C4-4278-B969-F538C8613B35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117626A4-B4C4-4278-B969-F538C8613B35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D12A9841-AF21-466F-B592-258FE58796E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D12A9841-AF21-466F-B592-258FE58796E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D12A9841-AF21-466F-B592-258FE58796E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D12A9841-AF21-466F-B592-258FE58796E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +188,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{201B32B7-7A76-47EE-892F-D3FA624BA90A} = {D43E64C1-B48E-4B8D-864A-856E66934EBC}
 		{117626A4-B4C4-4278-B969-F538C8613B35} = {D43E64C1-B48E-4B8D-864A-856E66934EBC}
+		{D12A9841-AF21-466F-B592-258FE58796E2} = {E6E8B8C3-5FD6-4F20-ACD6-4A354E0A1831}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B234D4FD-6E8D-4DAA-B676-BD4CFFAAC2D2}
