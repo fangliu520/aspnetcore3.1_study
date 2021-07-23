@@ -48,7 +48,7 @@ namespace WebCoreTest3._1
             {
                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
             });
-            
+
 
 
             ///全局注册异常Filter
@@ -56,6 +56,10 @@ namespace WebCoreTest3._1
             //{
             //    options.Filters.Add(typeof(ExceptionFilterAttribute)); //全局注册异常
             //});
+
+            #region 静态文件夹浏览 配合configure里面app.UseDirectoryBrowser
+            services.AddDirectoryBrowser(); 
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,8 +85,18 @@ namespace WebCoreTest3._1
             //执行静态文件 把wwwroot文件夹拷贝到bin目录下
             //app.UseStaticFiles(new StaticFileOptions()
             //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot"))//执行文件下的wwwroot 文件夹
-            //}); 
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//执行文件下的wwwroot 文件夹
+   
+
+            //});
+
+            ///静态文件浏览
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//执行文件下的wwwroot 文件夹
+                RequestPath = "/images"
+
+            });
 
             app.UseRouting();
 
