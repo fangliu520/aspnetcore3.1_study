@@ -8,6 +8,6 @@ namespace MJD.SpiderCrawler.Project.Model
 {
     public class BaseModel
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
     }
 }
